@@ -1,5 +1,4 @@
 <?php
-
     /**
      * 使用SeaLog，本类旨在做桥接和代码提示
      * Date: 2016/9/23 0023
@@ -7,6 +6,7 @@
      * Author: 李华胜 lihuasheng@wapwei.com
      */
     namespace Log;
+    use \SeasLog;
     class Log
     {
         public function __construct()
