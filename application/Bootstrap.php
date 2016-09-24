@@ -18,7 +18,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 
 	public function _initCommonFunction()
 	{
-		Yaf\Loader::import(Yaf\Registry::get('config')->application->directory . '/Common/Functions.php');
+		Yaf\Loader::import(Yaf\Registry::get('config')->application->directory . '/library/Common/Functions.php');
 	}
 	public function _initPlugin(Yaf\Dispatcher $dispatcher)
 	{
