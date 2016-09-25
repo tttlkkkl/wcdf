@@ -17,7 +17,7 @@ class IndexController extends Yaf\Controller_Abstract {
 		$get = $this->getRequest()->getQuery("get", "default value");
 		//2. fetch model
 		$model = new SampleModel();
-		\Log\Log::info('日志测试',array('{userName}' => 'neeke'),'module');
+		\log\Log::info('日志测试',array('{userName}' => 'neeke'),'module');
 		//3. assign
 		$this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name.$get);
