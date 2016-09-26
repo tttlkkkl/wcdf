@@ -3,12 +3,12 @@
 
 项目系统需求:
 
-> 系统:linux
+> linux CentOS ubuntu
 
-> web服务器:nginx 1.4.7以上版本
+> nginx >=1.4.7以上版本
 
-> 服务器脚本:PHP 5.5以上版本
+> PHP >= 5.5
 
-> 其他扩展:swoole 1.8.x 、yaf 2.3.4及以上版本、如果是PHP7建议使用最新yaf版本3.0.4、SeasLog 1.6.2
+> swoole 1.8.x 、yaf >=2.3.4及以上版本、如果是PHP7建议使用最新yaf版本3.0.4、SeasLog>=1.6.2
 
-> 缓存服务器3.0.3
+> redis 3.0.3

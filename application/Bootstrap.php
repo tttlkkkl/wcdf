@@ -9,20 +9,29 @@
  */
 class Bootstrap extends Yaf\Bootstrap_Abstract{
 
+	/**
+	 * 配置文件全局挂载
+	 */
     public function _initConfig()
 	{
-		//把配置保存起来
 		$arrConfig = Yaf\Application::app()->getConfig();
 		Yaf\Registry::set('config', $arrConfig);
 	}
 
+	/**
+	 * 全局函数库的加载
+	 */
 	public function _initCommonFunction()
 	{
 		Yaf\Loader::import(Yaf\Registry::get('config')->application->directory . '/library/Common/Functions.php');
 	}
+
+	/**
+	 * 注册一个插件
+	 * @param \Yaf\Dispatcher $dispatcher
+	 */
 	public function _initPlugin(Yaf\Dispatcher $dispatcher)
 	{
-		//注册一个插件
 		$objSamplePlugin = new SamplePlugin();
 		$dispatcher->registerPlugin($objSamplePlugin);
 	}
