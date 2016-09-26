@@ -109,19 +109,3 @@ class Loader
         self::$instance = [];
     }
 }
-
-/**
- * 作用范围隔离
- *
- * @param $file
- * @return mixed
- */
-function __include_file($file)
-{
-    return include $file;
-}
-
-function __require_file($file)
-{
-    return require $file;
-}
