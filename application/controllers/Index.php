@@ -16,13 +16,11 @@ class IndexController extends Yaf\Controller_Abstract {
 		//1. fetch query
 		$get = $this->getRequest()->getQuery("get", "default value");
 		//2. fetch model
-		$model = new SampleModel();
 		//\log\Log::info('日志测试',array('{userName}' => 'neeke'),'module');
 		//$result=\db\Db::table('users')->where(1)->select();
-        $result=\db\Db::table('users');
+        $result=\db\Db::table('users')->where(1)->select();
 		print_r($result);
 		//3. assign
-		$this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name.$get);
 
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
