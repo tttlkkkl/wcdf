@@ -15,11 +15,11 @@ class IndexController extends Yaf\Controller_Abstract {
 	public function indexAction($name = "Stranger") {
 		//1. fetch query
 		$get = $this->getRequest()->getQuery("get", "default value");
-
 		//2. fetch model
 		$model = new SampleModel();
-		\Log\Log::info('日志测试',array('xxxx'=>'日志数据'),'module');
-		test();
+		//\log\Log::info('日志测试',array('{userName}' => 'neeke'),'module');
+		$result=Db::table('users')->where(1)->select();
+		print_r($result);
 		//3. assign
 		$this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name.$get);

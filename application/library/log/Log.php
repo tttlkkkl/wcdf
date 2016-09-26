@@ -5,7 +5,7 @@
      * Time: 18:05
      * Author: 李华胜 lihuasheng@wapwei.com
      */
-    namespace Log;
+    namespace log;
     use \SeasLog;
     class Log
     {
