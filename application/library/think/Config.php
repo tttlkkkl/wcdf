@@ -19,6 +19,10 @@ class Config
         if(!$name){
             return null;
         }
-        return \Yaf\Registry::get('config')->$name;
+        $nameArr=explode('.',$name);
+        if($nameArr && count($nameArr) == 2){
+            return \Yaf\Registry::get('config')->$nameArr[0]->$nameArr[1];
+        }
+        return \Yaf\Registry::get('config')->$name->toArray();
     }
 }
