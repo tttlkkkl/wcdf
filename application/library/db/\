@@ -6,7 +6,10 @@
  * Time: 下午9:51
  * author :李华 yehong0000@163.com
  */
-namespace db;
 class Db extends \think\Db
 {
+    static public function table($name)
+    {
+        echo $name;
+    }
 }
