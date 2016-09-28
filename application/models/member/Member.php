@@ -7,11 +7,12 @@
  * author :李华 yehong0000@163.com
  */
 namespace member;
-use member\core\MemberCore;
-class Member
+use member\core\MemberCoreModel;
+
+class MemberModel
 {
     static public function addMember()
     {
-        return MemberCore::getInstance()->addMember();
+        return MemberCoreModel::getInstance()->addMember();
     }
 }

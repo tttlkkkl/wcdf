@@ -7,12 +7,17 @@
  * author :李华 yehong0000@163.com
  */
 namespace member\core;
-class MemberCore
+class MemberCoreModel
 {
     static public $Obj;
     public function __construct()
     {
     }
+
+    /**
+     * 获取实例
+     * @return MemberCoreModel
+     */
     public static function getInstance()
     {
         if(!self::$Obj){
@@ -20,8 +25,14 @@ class MemberCore
         }
         return self::$Obj;
     }
-    public function addMember()
+
+    /**
+     * 添加用户，数据结构和微信接口一致
+     * @param $data
+     */
+    public function addMember($data)
     {
         echo '加载';
+        $mid=1;
     }
 }
