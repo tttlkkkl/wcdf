@@ -128,4 +128,9 @@ function packing($status=0,$msg,$data,$type='json',$root)
         'msg'=>$msg,
         'data'=>$data
     );
+    if($type == 'json'){
+
+    }elseif($type == 'xml'){
+        
+    }
 }
