@@ -16,10 +16,10 @@ CREATE TABLE `w_member` (
   `extattr` text NULL comment'用户扩展属性',
   `status` tinyint(4) comment'1已关注，２已冻结，４未关注',
   `is_leader` tinyint(4) DEFAULT 0 comment'１领导，企业微信专有字段',
-  `create_time` INT(11) NOT NULL 0 comment'建立时间戳',
+  `create_time` INT(11) NOT NULL DEFAULT 0 comment'建立时的间戳',
   `update_time` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY (`c_id`,`userid`)
+  UNIQUE index c_id_userid (`c_id`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 部门表
@@ -36,5 +36,20 @@ CREATE TABLE `w_department`(
   `create_time` INT(11) NOT NULL DEFAULT 0 comment'建立时间戳',
   `update_time` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY (`id`,`c_id`)
+  UNIQUE index id_c_id (`id`,`c_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 部门人员关联表
+DROP TABLE IF EXISTS w_member_department;
+CREATE TABLE w_member_department(
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `c_id` INT(11) NOT NULL DEFAULT 0,
+  `m_id` INT(11) NOT NULL DEFAULT 0 comment'成员ｉｄ',
+  `d_id` INT (11) NOT NULL DEFAULT 0 comment'部门ｉｄ',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`c_id`,`m_id`,`d_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+

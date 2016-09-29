@@ -34,5 +34,6 @@ class MemberCoreModel
     {
         echo '加载';
         $mid=1;
+        throw new \Exception('错误的表达对象',-5623);
     }
 }

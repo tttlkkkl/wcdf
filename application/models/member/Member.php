@@ -11,8 +11,8 @@ use member\core\MemberCoreModel;
 
 class MemberModel
 {
-    static public function addMember()
+    static public function addMember($data)
     {
-        return MemberCoreModel::getInstance()->addMember();
+        return MemberCoreModel::getInstance()->addMember($data);
     }
 }
