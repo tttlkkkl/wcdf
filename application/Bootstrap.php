@@ -42,6 +42,10 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 	 */
 	public function _initPlugin(Yaf\Dispatcher $dispatcher)
 	{
+		$Config=Yaf\Registry::get('config');
+		if($Config->debug && $Config->xhprof->dir){//开启xhprof性能追踪
+			$dispatcher->registerPlugin(new XhprofPlugin());
+		}
 		$dispatcher->registerPlugin(new ApiPlugin());
 	}
 

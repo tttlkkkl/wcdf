@@ -8,5 +8,8 @@
  */
 class Helper
 {
+    public static function getRedis()
+    {
 
+    }
 }
