@@ -31,4 +31,4 @@
 > * 所有接口都应该标明请求参数，和其他必要说明。如果有源码贡献应该编写一个以模块名或组件名为名称的wiki文档页。
 
 ###其他
-> 见[wiki](https://github.com/tttlkkkl/wcdf.wiki.git)
+> ####见 [wiki](https://github.com/tttlkkkl/wcdf/wiki)
