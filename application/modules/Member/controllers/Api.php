@@ -6,6 +6,7 @@
  * Time: 下午10:48
  * author :李华 yehong0000@163.com
  */
+use \member\MemberModel;
 class ApiController extends Yaf\Controller_Abstract
 {
     public function init()
@@ -18,10 +19,9 @@ class ApiController extends Yaf\Controller_Abstract
      */
     public function addAction()
     {
-        try{
+        $param=array(//参数示例
 
-        }catch(\Exception $E){
-
-        }
+        );
+        $this->getResponse()->setBody(packing(0,'success',MemberModel::addMember($param),null,null));
     }
 }

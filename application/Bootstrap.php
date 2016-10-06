@@ -19,6 +19,16 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 	}
 
 	/**
+	 * 设置系统常量
+	 */
+	public function _initConstant()
+	{
+		define('DS',DIRECTORY_SEPARATOR);
+		define('APP_DIR',Yaf\Registry::get('config')->application->directory);
+		define('ROOT_DIR',dirname(APP_DIR));
+		define('VIEW_DIR',APP_DIR.DS.'views'.DS);
+	}
+	/**
 	 * 全局函数库的加载
 	 */
 	public function _initCommonFunction()
@@ -32,8 +42,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 	 */
 	public function _initPlugin(Yaf\Dispatcher $dispatcher)
 	{
-		$objSamplePlugin = new SamplePlugin();
-		$dispatcher->registerPlugin($objSamplePlugin);
+		$dispatcher->registerPlugin(new ApiPlugin());
 	}
 
 	public function _initRoute(Yaf\Dispatcher $dispatcher)

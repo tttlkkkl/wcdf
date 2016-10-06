@@ -13,5 +13,6 @@ class IndexController extends Yaf\Controller_Abstract
     {
         echo '用户模块首页';
         echo MemberModel::addMember(array());
+        var_dump(Yaf\Dispatcher::getInstance());
     }
 }

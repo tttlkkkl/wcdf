@@ -119,18 +119,19 @@ function db($name = '', $config = [], $force = true)
  * @param $msg
  * @param $data
  * @param string $type
- * @param $root
+ * @param $rootNodeName
  */
-function packing($status=0,$msg,$data,$type='json',$root)
+function packing($status=0,$msg,$data,$type='json',$rootNodeName)
 {
     $returnData=array(
         'status'=>$status,
         'msg'=>$msg,
         'data'=>$data
     );
-    if($type == 'json'){
-
+    if($type == 'json' || !$type){
+        return json_encode($returnData,JSON_UNESCAPED_UNICODE);
     }elseif($type == 'xml'){
-        
+        $rootNodeName=$rootNodeName?:'root';
+        return Tool::arrToXml($returnData,$rootNodeName,null);
     }
 }

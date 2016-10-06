@@ -32,8 +32,7 @@ class MemberCoreModel
      */
     public function addMember($data)
     {
-        echo '加载';
-        $mid=1;
-        throw new \Exception('错误的表达对象',-5623);
+        return '加载';
+        //throw new \Exception('错误信息',-5623);
     }
 }
