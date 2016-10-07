@@ -37,7 +37,7 @@ use think\paginator\Collection as PaginatorCollection;
  * @method static static findOrFail($data = null) 查找单条记录 如果不存在则抛出异常
  *
  */
-abstract class Model implements \JsonSerializable, \ArrayAccess
+abstract class Dao implements \JsonSerializable, \ArrayAccess
 {
 
     // 数据库对象池

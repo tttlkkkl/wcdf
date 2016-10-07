@@ -8,6 +8,7 @@
 use \think\Session;
 use \think\Cookie;
 use \think\Cache;
+use \db\Db;
 function test()
 {
     echo 'test';

@@ -20,7 +20,14 @@ class ApiController extends Yaf\Controller_Abstract
     public function addAction()
     {
         $param=array(//参数示例
-
+            'userid'=>'xcccxx',
+            'name'=>'ccc',
+            'position'=>'工程师',
+            'mobile'=>'18025434220',
+            'gender'=>1,
+            'email'=>'a@a.com',
+            'weixinid'=>'weixinid',
+            'is_leader'=>1
         );
         $this->getResponse()->setBody(packing(0,'success',MemberModel::addMember($param),null,null));
     }

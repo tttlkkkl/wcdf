@@ -23,6 +23,10 @@ class Config
         if($nameArr && count($nameArr) == 2){
             return \Yaf\Registry::get('config')->$nameArr[0]->$nameArr[1];
         }
-        return \Yaf\Registry::get('config')->$name->toArray();
+        $config=\Yaf\Registry::get('config')->$name;
+        if(is_object($config)){
+            return $config->toArray();
+        }
+        return $config;
     }
 }

@@ -12,8 +12,6 @@
 namespace think;
 
 use think\paginator\Collection as PaginatorCollection;
-use think\Request;
-
 abstract class Paginator
 {
     /** @var bool 是否为简洁模式 */
@@ -132,7 +130,7 @@ abstract class Paginator
      */
     public static function getCurrentPage($varPage = 'page', $default = 1)
     {
-        $page = Request::instance()->request($varPage);
+        $page = \Yaf\Dispatcher::getInstance()->getRequest()->getParam($varPage,1);
 
         if (filter_var($page, FILTER_VALIDATE_INT) !== false && (int)$page >= 1) {
             return $page;
@@ -147,7 +145,7 @@ abstract class Paginator
      */
     public static function getCurrentPath()
     {
-        return Request::instance()->baseUrl();
+        return \Yaf\Dispatcher::getInstance()->getInstance()->getRequest()->getBaseUri();
     }
 
     public function total()

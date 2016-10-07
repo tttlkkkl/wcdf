@@ -7,6 +7,8 @@
  * author :李华 yehong0000@163.com
  */
 namespace member\core;
+use member\dao\MemberModel;
+
 class MemberCoreModel
 {
     static public $Obj;
@@ -32,7 +34,9 @@ class MemberCoreModel
      */
     public function addMember($data)
     {
-        return '加载';
-        //throw new \Exception('错误信息',-5623);
+        $user=db('member');
+        $rs=$user->where(1)->paginate(1);
+        $page = $rs->render();
+        print_r($page);
     }
 }
