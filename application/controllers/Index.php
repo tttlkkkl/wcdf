@@ -1,29 +1,24 @@
 <?php
+
 /**
- * @name IndexController
- * @author root
- * @desc 默认控制器
- * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
+ * 默认模块，封装一些系统级别的接口
  */
 class IndexController extends Yaf\Controller_Abstract {
 
 	/**
-     * 默认动作
-     * Yaf支持直接把Yaf\Request\Abstract::getParam()得到的同名参数作为Action的形参
-     * 对于如下的例子, 当访问http://yourhost/s/index/index/index/name/root 的时候, 你就会发现不同
-     */
-	public function indexAction($name = "Stranger") {
-		//1. fetch query
-		$get = $this->getRequest()->getQuery("get", "default value");
-		//2. fetch model
-		//\log\Log::info('日志测试',array('{userName}' => 'neeke'),'module');
-		//$result=\db\Db::table('users')->where(1)->select();
-        $result=\db\Db::table('users')->where(1)->select();
-		print_r($result);
-		//3. assign
-		$this->getView()->assign("name", $name.$get);
+	 * @return bool
+	 */
+	public function indexAction()
+	{
+		echo '欢迎使用企业号快速开发服务框架';
+		return true;
+	}
 
-		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
-        return TRUE;
+	/**
+	 *  后台登陆页模板
+	 */
+	public function loginAction()
+	{
+
 	}
 }

@@ -25,13 +25,13 @@ class check
         }
         $len=mb_strlen($str);
         if(!$len){
-            throw new \Exception($remark.'是必填的哦',-40100);
+            throw new \Exception($remark.'是必填的哦',-4100);
         }
         if($len < $min){
-            throw new \Exception($remark.'长度不能少于'.$min.'个字符哦',-40101);
+            throw new \Exception($remark.'长度不能少于'.$min.'个字符哦',-4101);
         }
         if($len > $max){
-            throw new \Exception($remark.$max.'个字符就够了~',-40102);
+            throw new \Exception($remark.$max.'个字符就够了~',-4102);
         }
         return $str;
     }
@@ -47,14 +47,14 @@ class check
      */
     public static function checkMoney($val,$type,$min,$max){
         if(!$val || !is_numeric($val)){
-            throw new \Exception('存在错误的金额数值~', -40103);
+            throw new \Exception('存在错误的金额数值~', -4103);
         }
         $valArr=explode('.',$val);
         if(strlen($valArr[1])>2){
-            throw new \Exception('请填写如100.00的正确人民币金额数值', -40104);
+            throw new \Exception('请填写如100.00的正确人民币金额数值', -4104);
         }
         if($type && ($val < $min || $val > $max)){
-            throw new \Exception("单个金额应该介于{$min}元到{$max}元之间", -40105);
+            throw new \Exception("单个金额应该介于{$min}元到{$max}元之间", -4105);
         }
         return $val;
     }
@@ -68,17 +68,17 @@ class check
     public static function checkTime($time,$remark,$type)
     {
         if(!$time){
-            throw new \Exception($remark.'不能为空哦~',-40106);
+            throw new \Exception($remark.'不能为空哦~',-4106);
         }
         if(is_numeric($time)){
             if($time < 0){
-                throw new \Exception($remark.'不是正确的时间格式，请确认~',-40107);
+                throw new \Exception($remark.'不是正确的时间格式，请确认~',-4107);
             }
         }
         if(is_string($time)){
             $time=strtotime($time);
             if(!$time){
-                throw new \Exception($remark.'不是正确的时间格式，请确认~',-40108);
+                throw new \Exception($remark.'不是正确的时间格式，请确认~',-4108);
             }
         }
         return $type?date('Y-m-d H:i:s',$time):$time;
@@ -100,7 +100,7 @@ class check
         if(preg_match($rule,$val)){
             return $val;
         }else{
-            throw new \Exception('请填写正确的邮箱~', -40109);
+            throw new \Exception('请填写正确的邮箱~', -4109);
         }
     }
     /**
@@ -116,7 +116,7 @@ class check
         if(preg_match("/^0?1[3|4|5|7|8][0-9]\d{8}$/",$val)){
             return $val;
         }else{
-            throw new \Exception(($remark?:'手机号码').'格式不正确~', -40110);
+            throw new \Exception(($remark?:'手机号码').'格式不正确~', -4110);
         }
     }
     /**
@@ -134,7 +134,7 @@ class check
         }
         $isTel="/^([0-9]{3,4}-)?[0-9]{7,8}$/";
         if(!preg_match($isTel,$val)){
-            throw new \Exception($remark.'格式不正确哦~',-40111);
+            throw new \Exception($remark.'格式不正确哦~',-4111);
         }
         return $val;
     }
@@ -150,7 +150,7 @@ class check
             return $val;
         }
         if(!is_numeric($val)){
-            throw new \Exception($remark.'不是有效的数字',-40112);
+            throw new \Exception($remark.'不是有效的数字',-4112);
         }
         return $val;
     }
@@ -171,7 +171,7 @@ class check
             $val='http://'.$val;
         }
         if (!filter_var($val, FILTER_VALIDATE_URL)){
-            throw new \Exception('网址格式不正确',-40113);
+            throw new \Exception('网址格式不正确',-4113);
         }
         return $val;
     }

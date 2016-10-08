@@ -24,7 +24,7 @@
 ### 编码规范
 > * 在与yaf自身规则不冲突的情况下都应该遵守PSR编码规范。
 > * 所有错误都应该通过`throw new \Exception();`来抛出。
-> * 错误码:发生错误时应该区分错误等级,错误码由‘２个错误等级标识符’＋＇３个错误码’,标识符从10到80分别对应SeasLog的８个日志等级(debug,info,notice,warning,error,critical,alert,emergency)。如80456是一个emergency级别的错误。
+> * 错误码:发生错误时应该区分错误等级,错误码由‘1个错误等级标识符(和微信5位码作区别)’＋＇３个错误码’,标识符从1到8分别对应SeasLog的８个日志等级(debug,info,notice,warning,error,critical,alert,emergency)。如8456是一个emergency级别的错误。
 > * 日志：虽然可以在错误控制器中分别打印错误日志，但是日志无法记录一些现场关键信息，所以应该按照业务需求在代码中打印日志，以配合SeasLog进行健康预警和分析。
 > * 应该按功能划分模块，模块应至少具备３个控制器，Index控制器：后台管理端实现，进行页面渲染并做一些控制和跳转。Api控制器：提供模块可调用的api。Error控制器：集中的错误处理。
 > * 接口返回：默认以json格式返回数据,{"code":0,"msg":"success","data":"data"},code为０时标示成功，数据项在data中，否则code为错误码，msg为错误信息。
