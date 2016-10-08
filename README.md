@@ -17,7 +17,7 @@
 
 > redis 3.0.3
 
->  mariaDB 10.1.17
+> mariaDB 10.1.17
 
 
 
