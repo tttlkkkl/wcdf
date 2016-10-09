@@ -7,8 +7,6 @@
  * author :李华 yehong0000@163.com
  */
 namespace tool;
-use think\Exception;
-
 class Http
 {
     protected static $timeOut=60;

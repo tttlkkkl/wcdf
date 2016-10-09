@@ -13,12 +13,4 @@ class IndexController extends Yaf\Controller_Abstract {
 		echo '欢迎使用企业号快速开发服务框架';
 		return true;
 	}
-
-	/**
-	 *  后台登陆页模板
-	 */
-	public function loginAction()
-	{
-
-	}
 }
