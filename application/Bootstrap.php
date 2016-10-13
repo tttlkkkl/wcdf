@@ -47,6 +47,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 			$dispatcher->registerPlugin(new XhprofPlugin());
 		}
 		$dispatcher->registerPlugin(new ApiPlugin());
+		$dispatcher->registerPlugin(new UserInitPlugin());
 	}
 
 	public function _initRoute(Yaf\Dispatcher $dispatcher)

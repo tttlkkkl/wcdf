@@ -7,11 +7,12 @@
  * author :李华 yehong0000@163.com
  */
 namespace system\oauth;
+use tool\Http;
 use \tool\Tool;
 class login
 {
     static protected $Obj;
-
+    public $company;
     private function __construct()
     {
 
@@ -35,14 +36,16 @@ class login
         }
         return self::$Obj;
     }
+
     /**
      * 获取微信扫码登录地址
      * @return string
      */
     public function getLoginUrl()
     {
-        $corp_id='wx4fa7d40737be7934';
+        $corp_id=Base::getCompanyInfo(null)['corpid'];
         $state=Tool::randomStr(5);
+        session('state_str',$state);
         $redirect_uri=\Yaf\Registry::get('config')->domain->root.'/system/login/callback';
         $redirect_uri=urlencode($redirect_uri);
         $url="https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id={$corp_id}&redirect_uri={$redirect_uri}&state={$state}&usertype=all";
@@ -55,8 +58,32 @@ class login
     public function callback()
     {
         $Request=\Yaf\Dispatcher::getInstance()->getRequest();
-        var_dump($Request->getParams());
-        var_dump($_REQUEST);
+        if(session('state')!=$_REQUEST['state']){
+            throw new \Exception('标识符错误或已过期，请重试！',4200);
+        }
         return true;
+    }
+
+    /**
+     * 获取登录用户信息
+     * @param $code
+     */
+    public function getLoginUserInfo($code)
+    {
+        $url='https://qyapi.weixin.qq.com/cgi-bin/service/get_login_info?access_token='.WeiXin::getInstance(null,null);
+        $data=Http::post($url,array('auth_code'=>$code));
+        if($data['errcode']==0) {
+            return $data['access_token'];
+        }else{
+            Log::emergency('授权信息获取失败！返回：'.json_encode($data));
+            throw new \Exception('授权信息获取失败!',$data['errcode']);
+        }
+    }
+    /**
+     * 登录初始化,设置必要的系统变量等
+     */
+    public function init()
+    {
+
     }
 }

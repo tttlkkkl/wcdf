@@ -39,9 +39,9 @@ class Http
     static public function get($url,$params,&$header)
     {
         $ex=explode('?',$url);
-        if($ex){
+        if($ex && $params){
             $url=reset($ex).'?'.(end($ex)?(end($ex).'&'):'').http_build_query($params,'&');
-        }else{
+        }elseif(!$ex && $params){
             $url.=http_build_query($params,'&');
         }
         return self::execute($url,2,$header);
