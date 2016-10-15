@@ -19,10 +19,6 @@ class Redis extends SessionHandler
     /** @var \Redis */
     protected $handler = null;
     protected $config  = [
-        'host'         => '127.0.0.1', // redis主机
-        'port'         => 6379, // redis端口
-        'password'     => '', // 密码
-        'select'       => 0, // 操作库
         'expire'       => 3600, // 有效期(秒)
         'timeout'      => 0, // 超时时间(秒)
         'persistent'   => true, // 是否长连接
@@ -44,25 +40,7 @@ class Redis extends SessionHandler
      */
     public function open($savePath, $sessName)
     {
-        // 检测php环境
-        if (!extension_loaded('redis')) {
-            throw new Exception('not support:redis');
-        }
-        $this->handler = new \Redis;
-
-        // 建立连接
-        $func = $this->config['persistent'] ? 'pconnect' : 'connect';
-        $this->handler->$func($this->config['host'], $this->config['port'], $this->config['timeout']);
-
-        if ('' != $this->config['password']) {
-            $this->handler->auth($this->config['password']);
-        }
-
-        if (0 != $this->config['select']) {
-            $this->handler->select($this->config['select']);
-        }
-
-        return true;
+        $this->handler=\db\Redis::getInstance(['select'=>1]);//session保存在第二个数据库
     }
 
     /**

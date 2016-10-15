@@ -15,7 +15,6 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
      */
     public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
-        pre($_REQUEST);
         if(user() && user()['id']){
               define('UID',user()['id']);
         }
