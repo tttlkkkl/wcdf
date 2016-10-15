@@ -15,18 +15,22 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
      */
     public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
+        echo 111;
         if(user() && user()['id']){
               define('UID',user()['id']);
         }
         if(company() && company()['id']){
             define('CID',company()['id']);
         }
-        if(!defined('CID') || !defined('UID')){
+        if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['login'])){
             $request->setRequestUri('/system/login/login');
         }
     }
     public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
-        //TODO权限检查和跳转
+        echo $request->getControllerName();
+        $request->setRequestUri('/system/login/login');
+
+
     }
 }
