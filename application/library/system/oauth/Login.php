@@ -58,7 +58,7 @@ class login
     public function callback()
     {
         $Request=\Yaf\Dispatcher::getInstance()->getRequest();
-        if(session('state')!=$_REQUEST['state']){
+        if(session('state_str')!=$_REQUEST['state']){
             throw new \Exception('标识符错误或已过期，请重试！',4200);
         }
         $userInfo=$this->getLoginUserInfo($_REQUEST['auth_code']);
