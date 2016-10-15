@@ -32,7 +32,6 @@ function cache($name, $value = '', $options = null, $tag = null)
  */
 function session($name, $value = '', $prefix = null)
 {
-    return 1;
     return Helper::session($name,$value,$prefix);
 }
 /**

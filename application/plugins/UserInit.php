@@ -16,10 +16,10 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
     public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
         if(user() && user()['id']){
-              define('UID',user()['id']);
+              //define('UID',user()['id']);
         }
         if(company() && company()['id']){
-            define('CID',company()['id']);
+            //define('CID',company()['id']);
         }
         if(!defined('CID') || !defined('UID')){
             $request->setRequestUri('/system/login/login');

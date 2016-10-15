@@ -45,7 +45,6 @@ class Session
             $config = Config::get('session');
         }
         // 记录初始化信息
-        App::$debug && Log::record('[ SESSION ] INIT ' . var_export($config, true), 'info');
         $isDoStart = false;
         if (isset($config['use_trans_sid'])) {
             ini_set('session.use_trans_sid', $config['use_trans_sid'] ? 1 : 0);
