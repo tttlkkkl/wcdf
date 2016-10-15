@@ -75,6 +75,7 @@ function packing($status=0,$msg,$data,$type='json',$rootNodeName)
  */
 function user()
 {
+    return array();
     return array(
         'id'=>1,
         'userid'=>'tttlkkkl',
@@ -91,10 +92,17 @@ function user()
  */
 function company()
 {
+    return array();
    return array(
        'id'=>1,
        'name'=>'aK47',
        'corpid'=>'wx4fa7d40737be7934',
        'corpsecret'=>''
    );
+}
+function pre($data)
+{
+    echo '<pre>';
+    print_r($data);
+    echo '</pre>';
 }

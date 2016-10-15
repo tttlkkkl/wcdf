@@ -20,9 +20,11 @@ class LoginController extends Yaf\Controller_Abstract
     public function loginAction()
     {
         if(Login::getInstance()->checkLogin()){
-            $this->redirect('http://www.baidu.com');
+            $this->redirect($_SERVER['REQUEST_URI']);
         }else{
-            $this->redirect(Login::getInstance()->getLoginUrl());
+            $url=Login::getInstance()->getLoginUrl();
+            $this->getView()->assign('url',$url);
+            Yaf\Dispatcher::getInstance()->enableView();
         }
     }
 
