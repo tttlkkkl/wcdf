@@ -15,7 +15,7 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
      */
     public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
-        echo 111;
+        pre($_REQUEST);
         if(user() && user()['id']){
               define('UID',user()['id']);
         }
@@ -28,7 +28,6 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
     }
     public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
-        echo $request->getControllerName();
         $request->setRequestUri('/system/login/login');
 
 

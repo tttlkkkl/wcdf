@@ -27,22 +27,18 @@ class ErrorController extends Yaf\Controller_Abstract {
                 $Response->setHeader($Request->getServer('SERVER_PROTOCOL'),'500 Internal Server Error');
                 $this->getView()->assign('message',$exception->getMessage());
                 $this->display('error');
-                $Response->response();
             }elseif(in_array($exception->getCode(),[515,516,517,518])){
                 $Response->setHeader($Request->getServer('SERVER_PROTOCOL'),'404 Not Found');
                 $this->getView()->assign('message',$exception->getMessage());
                 $this->display('404');
-                $Response->response();
             }else{
                 $Response->setHeader('Content-Type', 'application/json; charset=utf-8');
                 $Response->setHeader($Request->getServer('SERVER_PROTOCOL'),'503 Service Unavailable');
                 $Response->setBody(packing($exception->getCode(),$exception->getMessage(),null,null,null));
-                $Response->response();
             }
         }else{
             $Response->setHeader('Content-Type', 'application/json; charset=utf-8');
             $Response->setBody(packing($exception->getCode(),$exception->getMessage(),null,null,null));
-            $Response->response();
         }
     }
 }

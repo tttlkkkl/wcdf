@@ -63,7 +63,7 @@ class login
         }
         $userInfo=$this->getLoginUserInfo($_REQUEST['auth_code']);
         if($userInfo){
-            pre($userInfo);
+            //pre($userInfo);
         }else{
             return false;
         }
