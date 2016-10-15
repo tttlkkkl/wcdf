@@ -41,6 +41,7 @@ class Redis extends SessionHandler
     public function open($savePath, $sessName)
     {
         $this->handler=\db\Redis::getInstance(['select'=>1]);//session保存在第二个数据库
+        return true;
     }
 
     /**
