@@ -21,7 +21,7 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
         if(company() && company()['id']){
             define('CID',company()['id']);
         }
-        if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['login'])){
+        if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['state'])){
             $request->setRequestUri('/system/login/login');
         }
     }
