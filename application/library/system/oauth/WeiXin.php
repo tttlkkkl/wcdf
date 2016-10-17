@@ -36,6 +36,7 @@ class WeiXin
      * 获取实例
      * @param $cid
      * @param $aid
+     * @return WeiXin
      */
     static public function getInstance($cid,$aid)
     {
@@ -52,7 +53,7 @@ class WeiXin
             if($this->AID){
                 //TODO
             }else{
-                $this->secrect=Base::getCompanyInfo()['getSecrect'];
+                $this->secrect=Base::getCompanyInfo(null)['corpsecret'];
             }
         }
         return $this->secrect;
@@ -62,13 +63,13 @@ class WeiXin
      */
     public function getAccessToken()
     {
-        $corpid=Base::getCompanyInfo($this->CID);
-        $secrect=$this->secrect;
+        $corpid=Base::getCompanyInfo($this->CID)['corpid'];
+        $secrect=$this->getSecrect();
         if(cache($corpid)){
             return cache($corpid);
         }
         $url='https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid='.$corpid.'&corpsecret='.$secrect;
-        $data=json_decode(Http::get($url),true);
+        $data=json_decode(Http::get($url,array(),$header),true);
         if($data['errcode']==0) {
             cache($corpid, $data['access_token'], 7100);
             return $data['access_token'];

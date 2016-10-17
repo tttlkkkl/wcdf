@@ -44,7 +44,7 @@ class Http
         }elseif(!$ex && $params){
             $url.=http_build_query($params,'&');
         }
-        return self::execute($url,2,$header);
+        return self::execute($url,null,2,$header);
     }
 
     /**
@@ -123,17 +123,18 @@ class Http
             $headerSize = curl_getinfo($cu, CURLINFO_HEADER_SIZE);#取得头长度
             $header = substr($tmp, 0, $headerSize);#获得头内容
             $body = substr($tmp, $headerSize);#获得文件内容
-            curl_close($cu);
             if(curl_getinfo($cu,CURLINFO_SIZE_DOWNLOAD)<=100){//如果内容长度小于100进行错误检查在微信文件调用时有用
                 $msg=json_decode($body,true);
                 if(is_numeric($msg['errcode'])){
-                    throw new \Exception($msg['errmsg'],-$msg['errcode']);
+                    throw new \Exception($msg['errmsg'],$msg['errcode']);
                 }
             }
+            curl_close($cu);
             return $body;
         }else{
+            $err=curl_error($cu);
             curl_close($cu);
-            throw new \Exception(curl_error($cu),-8200);
+            throw new \Exception($err,-8200);
         }
     }
 }

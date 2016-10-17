@@ -23,7 +23,7 @@ class File extends Driver
         'expire'        => 0,
         'cache_subdir'  => false,
         'prefix'        => '',
-        'path'          => CACHE_PATH,
+        'path'          => DATA_DIR.DS.'cache',
         'data_compress' => false,
     ];
 

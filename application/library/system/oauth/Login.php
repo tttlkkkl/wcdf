@@ -45,7 +45,7 @@ class login
     {
         $corp_id=Base::getCompanyInfo(null)['corpid'];
         $state=Tool::randomStr(5);
-        session('state_str',$state);
+        $state && session('state_str',$state);
         $redirect_uri=\Yaf\Registry::get('config')->domain->root.'/system/login/callback';
         $redirect_uri=urlencode($redirect_uri);
         $url="https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id={$corp_id}&redirect_uri={$redirect_uri}&state={$state}&usertype=all";
@@ -57,13 +57,12 @@ class login
      */
     public function callback()
     {
-        $Request=\Yaf\Dispatcher::getInstance()->getRequest();
         if(session('state_str')!=$_REQUEST['state']){
             throw new \Exception('标识符错误或已过期，请重试！',4200);
         }
         $userInfo=$this->getLoginUserInfo($_REQUEST['auth_code']);
         if($userInfo){
-            //pre($userInfo);
+            pre($userInfo);
         }else{
             return false;
         }
@@ -75,8 +74,8 @@ class login
      */
     public function getLoginUserInfo($code)
     {
-        $url='https://qyapi.weixin.qq.com/cgi-bin/service/get_login_info?access_token='.WeiXin::getInstance(null,null);
-        $data=Http::post($url,array('auth_code'=>$code));
+        $url='https://qyapi.weixin.qq.com/cgi-bin/service/get_login_info?access_token='.WeiXin::getInstance(null,null)->getAccessToken();
+        $data=Http::post($url,json_encode(array('auth_code'=>$code)));
         if($data['errcode']==0) {
             return $data['access_token'];
         }else{

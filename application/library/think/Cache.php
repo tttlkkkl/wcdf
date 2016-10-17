@@ -39,16 +39,14 @@ class Cache
         if (false === $name) {
             $name = md5(serialize($options));
         }
-
         if (true === $name || !isset(self::$instance[$name])) {
             $class = false !== strpos($type, '\\') ? $type : '\\think\\cache\\driver\\' . ucwords($type);
 
             // 记录初始化信息
-            App::$debug && Log::record('[ CACHE ] INIT ' . $type, 'info');
             if (true === $name) {
                 return new $class($options);
             } else {
-                self::$instance[$name] = new $class($options);
+                self::$instance[(string)$name] = new $class($options);
             }
         }
         self::$handler = self::$instance[$name];

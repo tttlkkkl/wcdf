@@ -21,7 +21,7 @@ function test()
  */
 function cache($name, $value = '', $options = null, $tag = null)
 {
-    Helper::cache($name,$value,$options,$tag);
+    return Helper::cache($name,$value,$options,$tag);
 }
 /**
  * Session管理

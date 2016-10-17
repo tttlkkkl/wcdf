@@ -27,6 +27,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 		define('APP_DIR',Yaf\Registry::get('config')->application->directory);
 		define('ROOT_DIR',dirname(APP_DIR));
 		define('VIEW_DIR',APP_DIR.DS.'views'.DS);
+		define('DATA_DIR',APP_DIR.DS.'public'.DS.'data');
 	}
 	/**
 	 * 全局函数库的加载

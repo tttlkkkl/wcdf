@@ -22,13 +22,8 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
             define('CID',company()['id']);
         }
         if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['state'])){
-            $request->setRequestUri('/system/login/login');
+            $_SERVER['REQUEST_URI']='system/login/login';
+            //$request->setRequestUri('system/login/login');//注意，不能用这个
         }
-    }
-    public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
-    {
-        $request->setRequestUri('/system/login/login');
-
-
     }
 }
