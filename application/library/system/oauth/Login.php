@@ -43,6 +43,8 @@ class login
      */
     public function getLoginUrl()
     {
+        \log\Log::debug('调用我');
+
         $corp_id=Base::getCompanyInfo(null)['corpid'];
         $state=Tool::randomStr(5);
         $state && session('state_str',$state);

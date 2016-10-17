@@ -13,16 +13,17 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
      * @param \Yaf\Request_Abstract $request
      * @param \Yaf\Response_Abstract $response
      */
-    public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
+    public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
         if(user() && user()['id']){
-            define('UID',user()['id']);
+              define('UID',user()['id']);
         }
         if(company() && company()['id']){
             define('CID',company()['id']);
         }
-        ((!defined('CID') || !defined('UID')) && !isset($_REQUEST['state']))?1:0 &&
-            $request->setRequestUri('system/login/login');
-
+        if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['state']) && strtolower($request->getControllerName()) != 'login'){
+            $response->setRedirect('/system/login/login');
+            die;
+        }
     }
 }
