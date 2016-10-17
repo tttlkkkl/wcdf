@@ -34,9 +34,9 @@ class LoginController extends Yaf\Controller_Abstract
     public function callbackAction()
     {
         if(Login::getInstance()->callback()){
-            $this->redirect('/system/index/index');
+            //$this->redirect('/system/index/index');
         }else{
-            $this->redirect('/system/login/login');
+            //$this->redirect('/system/login/login');
         }
     }
 }
