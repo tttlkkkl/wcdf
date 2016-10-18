@@ -44,8 +44,11 @@ class login
     public function getLoginUrl()
     {
         $corp_id=Base::getCompanyInfo(null)['corpid'];
-        $state=Tool::randomStr(5);
-        $state && session('state_str',$state);
+        $state=session('state_str');
+        if(!$state){
+            $state=Tool::randomStr(5);
+            session('state_str',$state);
+        }
         $redirect_uri=\Yaf\Registry::get('config')->domain->root.'/system/login/callback';
         $redirect_uri=urlencode($redirect_uri);
         $url="https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id={$corp_id}&redirect_uri={$redirect_uri}&state={$state}&usertype=all";
