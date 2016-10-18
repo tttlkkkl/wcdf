@@ -61,7 +61,7 @@ class login
     public function callback()
     {
         if(session('state_str')!=$_REQUEST['state']){
-            throw new \Exception('标识符错误或已过期，请重试！',4200);
+            //throw new \Exception('标识符错误或已过期，请重试！',4200);
         }
         $userInfo=$this->getLoginUserInfo($_REQUEST['auth_code']);
         if($userInfo){

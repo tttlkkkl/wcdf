@@ -24,10 +24,6 @@ class Redis extends Driver
 {
     protected $handler = null;
     protected $options = [
-        'host'       => '127.0.0.1',
-        'port'       => 6379,
-        'password'   => '',
-        'select'     => 0,
         'timeout'    => 0,
         'expire'     => 0,
         'persistent' => false,
@@ -41,23 +37,7 @@ class Redis extends Driver
      */
     public function __construct($options = [])
     {
-        if (!extension_loaded('redis')) {
-            throw new \BadFunctionCallException('not support: redis');
-        }
-        if (!empty($options)) {
-            $this->options = array_merge($this->options, $options);
-        }
-        $func          = $this->options['persistent'] ? 'pconnect' : 'connect';
-        $this->handler = new \Redis;
-        $this->handler->$func($this->options['host'], $this->options['port'], $this->options['timeout']);
-
-        if ('' != $this->options['password']) {
-            $this->handler->auth($this->options['password']);
-        }
-
-        if (0 != $this->options['select']) {
-            $this->handler->select($this->options['select']);
-        }
+        $this->handler=\db\Redis::getInstance(array('select'=>2));
     }
 
     /**

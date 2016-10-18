@@ -37,9 +37,14 @@ class Redis
      */
     static public function getInstance($config=[])
     {
-        $key='redis'.implode('_',$config);
+        $key=$config;
+        unset($key['select']);
+        $key='redis_'.implode('_',$key);
         if(!self::$Obj[$key]){
             self::$Obj[$key]=new self($config);
+        }
+        if(isset($config['select']) && 0 != $config['select']){
+            self::$Obj[$key]->handler->select($config['select']);
         }
         return self::$Obj[$key]->handler;
     }
@@ -64,11 +69,6 @@ class Redis
         if ('' != $this->config['password']) {
             $this->handler->auth($this->config['password']);
         }
-
-        if (0 != $this->config['select']) {
-            $this->handler->select($this->config['select']);
-        }
-
         return true;
     }
 }
