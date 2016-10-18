@@ -22,8 +22,8 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
             define('CID',company()['id']);
         }
         if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['state']) && strtolower($request->getControllerName()) != 'login'){
-            $response->setRedirect('/system/login/login');
-            die;
+            $request->setRequestUri('system/login/login');
+            //$response->setRedirect('/system/login/login');
         }
     }
 }
