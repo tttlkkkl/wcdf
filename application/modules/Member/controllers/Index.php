@@ -7,7 +7,7 @@
  * author :李华 yehong0000@163.com
  */
 use \member\MemberModel;
-class IndexController extends Yaf\Controller_Abstract
+class IndexController extends system\controllers\Web
 {
     public function indexAction()
     {

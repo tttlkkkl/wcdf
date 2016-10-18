@@ -7,7 +7,7 @@
  * author :李华 yehong0000@163.com
  */
 use system\oauth\Login;
-class LoginController extends Yaf\Controller_Abstract
+class LoginController extends system\controllers\Web
 {
     public function init()
     {

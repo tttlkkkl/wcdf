@@ -7,7 +7,7 @@
  * author :李华 yehong0000@163.com
  */
 use \member\MemberModel;
-class ApiController extends Yaf\Controller_Abstract
+class ApiController extends system\controllers\Api
 {
     public function init()
     {
