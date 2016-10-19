@@ -38,22 +38,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 	}
 
 	/**
-	 * 用户登录验证
-	 */
-	public function _initUserOAuth()
-	{
-		if(user() && user()['id']){
-			define('UID',user()['id']);
-		}
-		if(company() && company()['id']){
-			define('CID',company()['id']);
-		}
-		if((!defined('CID') || !defined('UID')) && !isset($_REQUEST['state'])){
-			\Yaf\Dispatcher::getInstance()->getRequest()->setRequestUri('system/login/login');
-			//$response->setRedirect('/system/login/login');
-		}
-	}
-	/**
 	 * 注册一个插件
 	 * @param \Yaf\Dispatcher $dispatcher
 	 */

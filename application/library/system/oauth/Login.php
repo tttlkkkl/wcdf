@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 后台系统管理员登录
+ * web端成员登录
  * Date: 16-10-9
  * Time: 下午9:16
  * author :李华 yehong0000@163.com
@@ -64,8 +64,9 @@ class login
             throw new \Exception('标识符错误或已过期，请重试！',4200);
         }
         $userInfo=$this->getLoginUserInfo($_REQUEST['auth_code']);
+        $userInfo=json_decode($userInfo,true);
         if($userInfo){
-            pre($userInfo);
+            return $this->loginInit($userInfo);
         }else{
             return false;
         }
@@ -88,8 +89,11 @@ class login
     /**
      * 登录初始化,设置必要的系统变量等
      */
-    public function init()
+    public function loginInit($userInfo)
     {
-
+        //TODO 待权限系统和用户系统完成编写相应的逻辑代码
+        echo '登录信息认证成功!'."\n";
+        echo '欢迎你'.($userInfo['usertype']==5?'普通成员-':'管理员-').$userInfo['user_info']['name'];
+        return false;
     }
 }
