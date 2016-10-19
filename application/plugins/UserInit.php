@@ -13,7 +13,7 @@ class UserInitPlugin extends Yaf\Plugin_Abstract
      * @param \Yaf\Request_Abstract $request
      * @param \Yaf\Response_Abstract $response
      */
-    public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
+    public function routerStartup(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
         if(user() && user()['id']){
               define('UID',user()['id']);
