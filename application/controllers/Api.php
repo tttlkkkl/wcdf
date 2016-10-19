@@ -6,11 +6,11 @@
      * Time: 9:18
      * Author: 李华胜 lihuasheng@wapwei.com
      */
-    class ApiController extends Yaf\Controller_Abstract
+    class ApiController extends system\controllers\Api
     {
         public function init()
         {
-            Yaf\Dispatcher::getInstance()->disableView();
+            parent::init();
         }
 
         public function indexAction()

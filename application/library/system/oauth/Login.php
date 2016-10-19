@@ -9,7 +9,7 @@
 namespace system\oauth;
 use tool\Http;
 use \tool\Tool;
-class login
+class Login
 {
     static protected $Obj;
     public $company;
@@ -22,9 +22,9 @@ class login
      * 检查是否已登录
      * @return bool
      */
-    public function checkLogin()
+    static public function checkLogin()
     {
-        return false;
+        return (defined('CID') || defined('UID'));
     }
     /**
      * 获取实例

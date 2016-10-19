@@ -9,11 +9,6 @@
 use \member\MemberModel;
 class ApiController extends system\controllers\Api
 {
-    public function init()
-    {
-        Yaf\Dispatcher::getInstance()->disableView();
-    }
-
     /**
      * 添加成员，数据字段与微信接口提供的一致
      */

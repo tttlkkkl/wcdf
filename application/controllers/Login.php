@@ -11,7 +11,7 @@ class LoginController extends system\controllers\Web
 {
     public function init()
     {
-        Yaf\Dispatcher::getInstance()->disableView();
+        parent::init();
     }
 
     /**

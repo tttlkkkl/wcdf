@@ -4,6 +4,10 @@
  * 默认模块，封装一些系统级别的接口
  */
 class IndexController extends system\controllers\Web {
+	public function init()
+	{
+		parent::init();
+	}
 
 	/**
 	 * @return bool

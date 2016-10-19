@@ -37,6 +37,15 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 		Yaf\Loader::import(Yaf\Registry::get('config')->application->directory . '/library/Common/Functions.php');
 	}
 
+	public function _initUser()
+	{
+		if(user() && user()['id']){
+			define('UID',user()['id']);
+		}
+		if(company() && company()['id']){
+			define('CID',company()['id']);
+		}
+	}
 	/**
 	 * 注册一个插件
 	 * @param \Yaf\Dispatcher $dispatcher
@@ -47,7 +56,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract{
 		if($Config->debug && $Config->xhprof->dir){//开启xhprof性能追踪
 			$dispatcher->registerPlugin(new XhprofPlugin());
 		}
-		$dispatcher->registerPlugin(new UserInitPlugin());
 	}
 
 	public function _initRoute(Yaf\Dispatcher $dispatcher)
