@@ -14,7 +14,11 @@ class IndexController extends system\controllers\Web {
 	 */
 	public function indexAction()
 	{
-		echo '欢迎使用企业号快速开发服务框架';
-		return true;
+		$apiList=array(
+			array('部门:','/member/api/department/'),
+			array('部门层级列表:','/member/api/department_level/'),
+		);
+		$this->getView()->assign('apiList',$apiList);
+		$this->getView()->assign('domain',Yaf\Registry::get('config')->domain->root);
 	}
 }

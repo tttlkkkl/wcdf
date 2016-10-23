@@ -34,9 +34,9 @@ class MemberCoreModel
      */
     public function addMember($data)
     {
-        $user=db('member');
-        $rs=$user->where(1)->paginate(1);
-        $page = $rs->render();
-        print_r($page);
+//        $user=db('member');
+//        $rs=$user->where(1)->paginate(1);
+//        $page = $rs->render();
+//        print_r($page);
     }
 }
