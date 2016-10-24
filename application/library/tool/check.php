@@ -38,24 +38,29 @@ class check
     }
 
     /**
-     * 金额验证
+     * 人民币验证
      * @param $val
+     * @param $remark
+     * @param $must
      * @param $type
      * @param $min
      * @param $max
-     * @return mixed
+     * @return int
      * @throws \Exception
      */
-    public static function checkMoney($val,$type,$min,$max){
-        if(!$val || !is_numeric($val)){
-            throw new \Exception('存在错误的金额数值~', -4103);
+    public static function checkMoney($val,$remark,$must,$type,$min,$max){
+        if($must===false && !$val){
+            return 0;
+        }
+        if(!$val || !is_numeric($val) || $val < 0){
+            throw new \Exception($remark.'需要一个正确的金额数值~', -4103);
         }
         $valArr=explode('.',$val);
         if(strlen($valArr[1])>2){
-            throw new \Exception('请填写如100.00的正确人民币金额数值', -4104);
+            throw new \Exception($remark.'应该是如100.00的正确人民币金额数值', -4104);
         }
         if($type && ($val < $min || $val > $max)){
-            throw new \Exception("单个金额应该介于{$min}元到{$max}元之间", -4105);
+            throw new \Exception($remark."只能介于{$min}元到{$max}元之间", -4105);
         }
         return $val;
     }

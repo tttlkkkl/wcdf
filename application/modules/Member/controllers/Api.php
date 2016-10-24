@@ -14,20 +14,17 @@ class ApiController extends system\controllers\Api
     }
 
     /**
-     * 添加成员，数据字段与微信接口提供的一致
+     * 成员资源
+     */
+    public function memberAction()
+    {
+
+    }
+    /**
+     * 部门资源
      */
     public function departmentAction()
     {
-        $param=array(//参数示例
-            'userid'=>'xcccxx',
-            'name'=>'ccc',
-            'position'=>'工程师',
-            'mobile'=>'18025434220',
-            'gender'=>1,
-            'email'=>'a@a.com',
-            'weixinid'=>'weixinid',
-            'is_leader'=>1
-        );
         $fun=sprintf('%sDepartment',$this->getRequest()->getMethod());
         $this->getResponse()->setBody(packing(0,'success',call_user_func(array('system\member\Factory',$fun)),null,null));
     }

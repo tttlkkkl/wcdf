@@ -9,7 +9,7 @@
 namespace system\member;
 class Factory
 {
-    public function __call($name, $arguments)
+    public function __callStatic($name, $arguments)
     {
         return 'Bad Request';
     }
@@ -21,5 +21,15 @@ class Factory
     static public function getDepartment($id)
     {
         return 111;
+    }
+
+    /**
+     * 添加部门
+     * @param $data
+     */
+    static public function postDepartment($data)
+    {
+        $data=$data?:$_POST;
+        return \system\member\local\DepartmentLocal::getInstance()->addDepartment($data);
     }
 }

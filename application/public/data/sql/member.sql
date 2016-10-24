@@ -17,6 +17,7 @@ CREATE TABLE `w_member` (
   `status` tinyint(4) comment'1已关注，２已冻结，４未关注',
   `is_leader` tinyint(4) DEFAULT 0 comment'１领导，企业微信专有字段',
   `create_time` INT(11) NOT NULL DEFAULT 0 comment'建立时的间戳',
+  `delete_time` INT (11) NOT NULL DEFAULT 0 comment'标记删除，并记录删除时间',
   `update_time` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE index c_id_userid (`c_id`,`userid`)
@@ -25,7 +26,8 @@ CREATE TABLE `w_member` (
 -- 部门表
 DROP TABLE IF EXISTS `w_department`;
 CREATE TABLE `w_department`(
-  `id` INT (11) NOT NULL AUTO_INCREMENT comment'主键与微信或企业微信保持一致',
+  `pk` INT (11) NOT NULL AUTO_INCREMENT comment'主键与微信或企业微信保持一致',
+  `id` INT (11) NOT NULL DEFAULT 1 comment'部门id，与微信对应',
   `c_id` INT(11) NOT NULL comment'企业标识',
   `name` CHAR (32) NOT NULL comment'部门名称',
   `parentid` int(11) NOT NULL DEFAULT 0 comment'父部门id',
@@ -34,8 +36,9 @@ CREATE TABLE `w_department`(
   `rgt` INT(11) NOT NULL DEFAULT 0 comment'节点右值，实际从１开始',
   `depth` INT(11) NOT NULL DEFAULT 0 comment'节点深度,１为根',
   `create_time` INT(11) NOT NULL DEFAULT 0 comment'建立时间戳',
+  `delete_time` INT (11) NOT NULL DEFAULT 0 comment'标记删除，并记录删除时间',
   `update_time` DATETIME NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`pk`),
   UNIQUE index id_c_id (`id`,`c_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
