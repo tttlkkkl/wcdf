@@ -32,4 +32,4 @@
 > * 控制器中不应该写太多的业务代码，仅作为一个访问入口。为了方便扩展和公共控制，预置Api,Web,Error三个控制器，所有提供api接口的控制器都应该继承system\controllers\Api,所有提供web页面访问的都应该继承system\controllers\Web,所有错误控制器都应该继承system\controllers\Error。
 
 ###其他
-> ####见 [wiki](https://github.com/tttlkkkl/wcdf/wiki)
+> ####见 [wiki](https://git.oschina.net/tttlkkkl/wcdf/wikis/home)
