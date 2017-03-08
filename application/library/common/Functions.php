@@ -57,7 +57,7 @@ function db($name = '', $config = [], $force = true)
 function packing($status=0,$msg,$data,$type='json',$rootNodeName)
 {
     $returnData=array(
-        'status'=>$status,
+        'code'=>$status,
         'msg'=>$msg,
         'data'=>$data
     );

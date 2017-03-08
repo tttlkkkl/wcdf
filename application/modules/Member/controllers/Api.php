@@ -20,12 +20,19 @@ class ApiController extends system\controllers\Api
     {
 
     }
+
     /**
      * 部门资源
      */
     public function departmentAction()
     {
-        $fun=sprintf('%sDepartment',$this->getRequest()->getMethod());
-        $this->getResponse()->setBody(packing(0,'success',call_user_func(array('system\member\Factory',$fun)),null,null));
+        $fun = sprintf('%sDepartment', $this->getRequest()->getMethod());
+        $this->getResponse()->setBody(packing(0, 'success', call_user_func(
+            [
+                'system\member\Factory',
+                $fun
+            ],
+            $_POST
+        ), null, null));
     }
 }

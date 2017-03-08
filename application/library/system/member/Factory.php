@@ -16,6 +16,7 @@ class Factory
 
     /**
      * 获取部门信息
+     *
      * @param $id
      */
     static public function getDepartment($id)
@@ -25,11 +26,11 @@ class Factory
 
     /**
      * 添加部门
+     *
      * @param $data
      */
     static public function postDepartment($data)
     {
-        $data=$data?:$_POST;
-        return \system\member\local\DepartmentLocal::getInstance()->addDepartment($data);
+        return \system\member\local\DepartmentLocal::getInstance()->post($data);
     }
 }
