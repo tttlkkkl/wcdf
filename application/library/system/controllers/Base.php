@@ -25,6 +25,17 @@ trait Base
         $_SERVER['REQUEST_METHOD'] === "PUT"
             ? parse_str(file_get_contents('php://input'), $_PUT)
             : $_PUT = $_POST;
+        //填入路由参数
+        $routeParam = \Yaf\Dispatcher::getInstance()->getRequest()->getParams();
+        if ($routeParam && is_array($routeParam)) {
+            if (count($routeParam) == 1) {
+                $keys = array_keys($routeParam);
+                $_PUT['id'] = $keys[0];
+            } else {
+                //合并且优先取非路由参数
+                $_PUT = array_merge($routeParam, $_PUT ?: []);
+            }
+        }
         if (isset($key)) {
             return isset($_PUT[$key]) ? $_PUT[$key] : $default;
         } else {

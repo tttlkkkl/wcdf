@@ -7,6 +7,7 @@
  * author :李华 yehong0000@163.com
  */
 namespace system\member;
+
 use system\member\local\DepartmentLocal;
 
 class Factory
@@ -20,10 +21,13 @@ class Factory
      * 获取部门信息
      *
      * @param $id
+     *
+     * @return mixed
+     * @throws \Exception
      */
-    static public function getDepartment($id)
+    static public function getDepartment($data)
     {
-        return 111;
+        return DepartmentLocal::getInstance()->get($data['id']);
     }
 
     /**
@@ -44,7 +48,21 @@ class Factory
      * @return bool
      * @throws \Exception
      */
-    public static function putDepartment($data){
+    public static function putDepartment($data)
+    {
         return DepartmentLocal::getInstance()->put($data);
+    }
+
+    /**
+     * 删除部门
+     *
+     * @param $id
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteDepartment($data)
+    {
+        return DepartmentLocal::getInstance()->delete($data['id']);
     }
 }

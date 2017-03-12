@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 部门本地操作类
+ * 部门本地curd操作类
  * Date: 16-10-24
  * Time: 下午3:57
  * author :李华 yehong0000@163.com
@@ -14,7 +14,8 @@ class DepartmentLocal
 {
     protected static $Obj;
     protected        $DbModel;
-    private $record;
+    private          $record;
+
     private function __construct()
     {
         $this->DbModel = db('department');
@@ -108,26 +109,26 @@ class DepartmentLocal
         }
         //移动部门位置
         if ($updateData['parentid'] > 0 && $updateData['parentid'] != $parentData['id']) {
-            throw new \Exception('暂不支持部门移动',40014);
+            throw new \Exception('暂不支持部门移动', 40014);
             /**
-            $newParentData=$this->getRecordById($updateData['parentid']);
-            if(!$newParentData){
-                throw new \Exception('不存在的父级部门',4011);
-            }
-            if($newParentData['lft']>$updateData['lft'] && $newParentData['rgt']<$updateData['rgt']){
-                throw new \Exception('非法移动,不能移动到子部门下!',4012);
-            }
+             * $newParentData=$this->getRecordById($updateData['parentid']);
+             * if(!$newParentData){
+             * throw new \Exception('不存在的父级部门',4011);
+             * }
+             * if($newParentData['lft']>$updateData['lft'] && $newParentData['rgt']<$updateData['rgt']){
+             * throw new \Exception('非法移动,不能移动到子部门下!',4012);
+             * }
              * */
         }
         $upMap = [
             'c_id' => CID,
             'id'   => $updateData['id']
         ];
-        $up=$this->DbModel->where($upMap)->update($updateData);
-        if($up){
+        $up = $this->DbModel->where($upMap)->update($updateData);
+        if ($up) {
             return true;
-        }else{
-            throw new \Exception('修改失败!',40015);
+        } else {
+            throw new \Exception('修改失败!', 40015);
         }
     }
 
@@ -138,17 +139,19 @@ class DepartmentLocal
      *
      * @return mixed
      */
-    private function getRecordById($id){
-        if(!isset($this->record[$id])){
-            $map=[
-                'c_id'=>CID,
-                'id'=>$id,
-                'delete_time'=>0
+    private function getRecordById($id)
+    {
+        if (!isset($this->record[$id])) {
+            $map = [
+                'c_id'        => CID,
+                'id'          => $id,
+                'delete_time' => 0
             ];
-            $this->record[$id]=$this->DbModel->where($map)->find();
+            $this->record[$id] = $this->DbModel->where($map)->find();
         }
         return $this->record[$id];
     }
+
     /**
      * 数据验证
      *
@@ -193,5 +196,68 @@ class DepartmentLocal
             $insertData['depth'] = $parentData['depth'] + 1;
         }
         return $insertData;
+    }
+
+    /**
+     * 删除数据
+     *
+     * @param $id
+     *
+     * @return bool
+     * @throws \Exception
+     * @throws \think\Exception
+     */
+    public function delete($id)
+    {
+        $id = intval($id);
+        if ($id <= 0) {
+            throw new \Exception('参数错误', 3001);
+        }
+        $map = [
+            'c_id'        => CID,
+            'id'          => $id,
+            'delete_time' => 0
+        ];
+        $record = $this->getRecordById($id);
+        if ($record) {
+            $this->DbModel->transaction();
+            //如果不是根节点
+            if($record['lft'] !=1){
+                $up = $this->DbModel
+                    ->where('rgt', '>=', $record['rgt'])
+                    ->whereOr('lft', '>=', $record['rgt'])
+                    ->fetchSql(true)
+                    ->update([
+                        'lft' => ['exp', 'lft - 2'],
+                        'rgt' => ['exp', 'rgt - 2']
+                    ]);
+            }else{
+                $up=1;
+            }
+            if ($up && $this->DbModel->where($map)->update(['delete_time' => time()])) {
+                $this->DbModel->commit();
+                return true;
+            } else {
+                $this->DbModel->rollback();
+                throw new \Exception('资源不存在或删除失败', 4033);
+            }
+        }else{
+            throw new \Exception('资源不存在',4032);
+        }
+    }
+
+    /**
+     * 获取部门详情
+     * @param $id
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function get($id){
+        $id = intval($id);
+        if ($id <= 0) {
+            throw new \Exception('参数错误', 3001);
+        }
+        return $this->getRecordById($id);
     }
 }
