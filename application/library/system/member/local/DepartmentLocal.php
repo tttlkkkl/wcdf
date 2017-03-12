@@ -14,7 +14,7 @@ class DepartmentLocal
 {
     protected static $Obj;
     protected        $DbModel;
-
+    private $record;
     private function __construct()
     {
         $this->DbModel = db('department');
@@ -95,23 +95,60 @@ class DepartmentLocal
 
     public function put($data)
     {
-        $updateData = $this->checkData($data,$parentData);
+        $updateData = $this->checkData($data, $parentData);
         //数据重复性检查
         $map = [
             'c_id'     => CID,
             'parentid' => $updateData['parentid'],
-            'id'       => ['!=', $updateData['id']],
+            'id'       => ['neq', $updateData['id']],
             'name'     => $updateData['name']
         ];
         if ($this->DbModel->where($map)->field('id')->find()) {
             throw new \Exception('已存在相同的部门!', 4005);
         }
+        //移动部门位置
+        if ($updateData['parentid'] > 0 && $updateData['parentid'] != $parentData['id']) {
+            throw new \Exception('暂不支持部门移动',40014);
+            /**
+            $newParentData=$this->getRecordById($updateData['parentid']);
+            if(!$newParentData){
+                throw new \Exception('不存在的父级部门',4011);
+            }
+            if($newParentData['lft']>$updateData['lft'] && $newParentData['rgt']<$updateData['rgt']){
+                throw new \Exception('非法移动,不能移动到子部门下!',4012);
+            }
+             * */
+        }
         $upMap = [
             'c_id' => CID,
             'id'   => $updateData['id']
         ];
+        $up=$this->DbModel->where($upMap)->update($updateData);
+        if($up){
+            return true;
+        }else{
+            throw new \Exception('修改失败!',40015);
+        }
     }
 
+    /**
+     * 获取一条记录
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    private function getRecordById($id){
+        if(!isset($this->record[$id])){
+            $map=[
+                'c_id'=>CID,
+                'id'=>$id,
+                'delete_time'=>0
+            ];
+            $this->record[$id]=$this->DbModel->where($map)->find();
+        }
+        return $this->record[$id];
+    }
     /**
      * 数据验证
      *
@@ -131,7 +168,7 @@ class DepartmentLocal
             'parentid'    => $data['parentid'],
             'order'       => (is_int($data['order']) && $data['order'] >= 0) ? $data['order'] : 0,
             'c_id'        => CID,
-            'update_time' => time()
+            'update_time' => date('Y-m-d H:i:s')
         ];
         if ($data['id'] && is_numeric($data['id'])) {
             $insertData['id'] = intval($data['id']);

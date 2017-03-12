@@ -8,9 +8,9 @@
  */
 namespace system\controllers;
 use system\oauth\Login;
-
 class Api extends \Yaf\Controller_Abstract
 {
+    use \system\controllers\Base;
     public function init()
     {
         \Yaf\Dispatcher::getInstance()->disableView();

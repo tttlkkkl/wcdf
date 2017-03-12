@@ -7,6 +7,8 @@
  * author :李华 yehong0000@163.com
  */
 namespace system\member;
+use system\member\local\DepartmentLocal;
+
 class Factory
 {
     public function __callStatic($name, $arguments)
@@ -31,6 +33,18 @@ class Factory
      */
     static public function postDepartment($data)
     {
-        return \system\member\local\DepartmentLocal::getInstance()->post($data);
+        return DepartmentLocal::getInstance()->post($data);
+    }
+
+    /**
+     * 更新部门
+     *
+     * @param $data
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public static function putDepartment($data){
+        return DepartmentLocal::getInstance()->put($data);
     }
 }

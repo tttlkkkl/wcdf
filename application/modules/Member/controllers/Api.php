@@ -32,7 +32,7 @@ class ApiController extends system\controllers\Api
                 'system\member\Factory',
                 $fun
             ],
-            $_POST
+            self::getParams()
         ), null, null));
     }
 }
