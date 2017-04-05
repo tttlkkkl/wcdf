@@ -32,8 +32,22 @@
     .left , .left-nav{
         height: inherit;
     }
+    .left{
+        width: 200px;
+        float: left;
+    }
     .content{
-        
+        width: 100%;
+        height: inherit;
+    }
+    .window{
+        margin-left:200px;
+        width: auto;
+        height: inherit;
+    }
+    .user_nav{
+        float: right;
+        right: 50px;
     }
 </style>
 
@@ -43,32 +57,43 @@
             <li class="layui-nav-item layui-this"><a href="/manager/">首页</a></li>
             <li class="layui-nav-item"><a href="#">成员</a></li>
             <li class="layui-nav-item"><a href="#">考勤</a></li>
-        </ul>
-    </div>
-    <div class="left">
-        <ul class="layui-nav layui-nav-tree left-nav" lay-filter="left_nav">
-            <li class="layui-nav-item layui-nav-itemed">
-                <a href="javascript:;">管理</a>
+            <li class="layui-nav-item user_nav">
+                <a href="javascript:;">root</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">模板设置</a></dd>
-                    <dd><a href="javascript:;">界面控制</a></dd>
-                    <dd><a href="#">二维码考勤</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">数据</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="#">打卡记录</a></dd>
-                    <dd><a href="#">考勤分析</a></dd>
-                    <dd><a href="#">考勤月报</a></dd>
-                    <dd><a href="#">图表分析</a></dd>
+                    <dd><a href="javascript:;">设置</a></dd>
+                    <dd><a href="javascript:;">退出</a></dd>
                 </dl>
             </li>
         </ul>
     </div>
     <div class="content">
+        <div class="left">
+            <ul class="layui-nav layui-nav-tree left-nav" lay-filter="left_nav">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">模板设置</a></dd>
+                        <dd><a href="javascript:;">界面控制</a></dd>
+                        <dd><a href="#">二维码考勤</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">数据</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="#">打卡记录</a></dd>
+                        <dd><a href="#">考勤分析</a></dd>
+                        <dd><a href="#">考勤月报</a></dd>
+                        <dd><a href="#">图表分析</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <!--展示界面-->
+        <div class="window">
 
+        </div>
     </div>
+
 </div>
 <script type="text/javascript" src="frame.js"></script>
 </body>
