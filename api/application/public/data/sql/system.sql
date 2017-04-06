@@ -10,6 +10,6 @@ CREATE TABLE w_company(
     `update_time` DATETIME NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE index corpid (`corpid`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公司信息表';
 INSERT INTO w_company(id,name,corpid,corpsecret,create_time,update_time)
 VALUES (1,'AK47战队','wx4fa7d40737be7934','smZfzJCzqgJCMwbUiFHaBMVllUwLsJYU0XDTN9VbNjYA4PlBX-j2fkQoUiWFx0Ar',unix_timestamp(now()),now());

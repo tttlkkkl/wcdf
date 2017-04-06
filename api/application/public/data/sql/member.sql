@@ -21,7 +21,7 @@ CREATE TABLE `w_member` (
   `update_time` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE index c_id_userid (`c_id`,`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='成员信息表';
 
 -- 部门表
 DROP TABLE IF EXISTS `w_department`;
@@ -40,7 +40,7 @@ CREATE TABLE `w_department`(
   `update_time` DATETIME NOT NULL,
   PRIMARY KEY (`pk`),
   UNIQUE index id_c_id (`id`,`c_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门信息表';;
 
 
 -- 部门人员关联表
@@ -52,7 +52,7 @@ CREATE TABLE w_member_department(
   `d_id` INT (11) NOT NULL DEFAULT 0 comment'部门ｉｄ',
   PRIMARY KEY (`id`),
   UNIQUE KEY (`c_id`,`m_id`,`d_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门和成员关联的中间表,一对多关联，即一个人可以同属几个部门';
 
 
 
