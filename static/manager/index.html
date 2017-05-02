@@ -9,59 +9,21 @@
     <meta name="format-detection" content="telephone=no">
     <title>企业号快捷开发平台</title>
     <script type="text/javascript" src="/common/layui/layui.js"></script>
+    <link href="/common/layui/css/layui.css" rel="stylesheet" media="all">
     <script type="text/javascript" src="/common/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="public/base.js"></script>
-    <link href="/common/layui/css/layui.css" rel="stylesheet" media="all">
+    <link href="public/base.css" rel="stylesheet" media="all">
 </head>
 <body>
-<style>
-    html {
-        height: 100%;
-        margin: 0;
-    }
-
-    body {
-        height: 100%;
-        margin: 0;
-    }
-
-    .main {
-        width: 100%;
-        height: 100%;
-    }
-    .left , .left-nav{
-        height: inherit;
-    }
-    .left{
-        width: 200px;
-        float: left;
-    }
-    .content{
-        width: 100%;
-        height: inherit;
-    }
-    .window{
-        margin-left:200px;
-        width: auto;
-        height: inherit;
-    }
-    .user_nav{
-        float: right;
-        right: 50px;
-    }
-</style>
-
 <div class="main">
     <div class="top">
         <ul class="layui-nav" lay-filter="top_nav">
-            <li class="layui-nav-item layui-this"><a href="/manager/">首页</a></li>
-            <li class="layui-nav-item"><a href="#">成员</a></li>
-            <li class="layui-nav-item"><a href="#">考勤</a></li>
+            <li class="layui-nav-item layui-this"><a href="/manager/">管理首页</a></li>
             <li class="layui-nav-item user_nav">
                 <a href="javascript:;">root</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">设置</a></dd>
-                    <dd><a href="javascript:;">退出</a></dd>
+                    <dd><a href="#">设置</a></dd>
+                    <dd><a href="#">退出</a></dd>
                 </dl>
             </li>
         </ul>
@@ -70,16 +32,18 @@
         <div class="left">
             <ul class="layui-nav layui-nav-tree left-nav" lay-filter="left_nav">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">管理</a>
+                    <a href="#">成员</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="#" url="/manager/member/index.html">组织架构</a></dd>
+                        <dd><a href="#">同步数据</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">考勤</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">模板设置</a></dd>
                         <dd><a href="javascript:;">界面控制</a></dd>
                         <dd><a href="#">二维码考勤</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">数据</a>
-                    <dl class="layui-nav-child">
                         <dd><a href="#">打卡记录</a></dd>
                         <dd><a href="#">考勤分析</a></dd>
                         <dd><a href="#">考勤月报</a></dd>
@@ -89,12 +53,28 @@
             </ul>
         </div>
         <!--展示界面-->
-        <div class="window">
-
+        <div id="window">
+            <div class="hello">
+                欢迎您！
+            </div>
         </div>
     </div>
 
 </div>
+<script type="text/javascript">
+    layui.use('element', function () {
+        var element = layui.element();
+    });
+    $(function () {
+        $('.layui-nav').on('click', 'a', function () {
+            var This=$(this);
+            var url = This.attr('url');
+            var html= $.get(url,function(html){
+                $('#window').html(html);
+            })
+        });
+    })
+</script>
 <script type="text/javascript" src="frame.js"></script>
 </body>
 </html>
