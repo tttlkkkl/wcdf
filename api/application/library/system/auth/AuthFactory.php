@@ -6,13 +6,13 @@
  * Time: 上午4:16
  * author :李华 yehong0000@163.com
  */
-namespace system\member;
+namespace system\auth;
 
 use system\auth\Login;
 
-class Factory
+class AuthFactory
 {
-    public function __callStatic($name, $arguments)
+    public static function __callStatic($name, $arguments)
     {
         return 'Bad Request';
     }
@@ -27,6 +27,10 @@ class Factory
      */
     static public function getAuth()
     {
-        return Login::getInstance()->checkLogin();
+        $result = Login::getInstance()->checkLogin();
+        return [
+            'result'  => $result,
+            'authUrl' => $result ? '' : $redirect_uri = \Yaf\Registry::get('config')->domain->api . '/system/login/login'
+        ];
     }
 }

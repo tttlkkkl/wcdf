@@ -4,7 +4,7 @@
  */
 
 var http = {
-    apiUrl:'http://api.wcdf.com',
+    apiUrl:'http://api.lihuasheng.cn',
     motheds: 'post.get.put.delete',
     get: function (url, data, fun) {
         this.go('get', url, data, fun);
@@ -22,7 +22,7 @@ var http = {
         if (url == '') {
             return 0;
         }
-        if (!this.motheds.indexOf(mothed) <= 0) {
+        if (this.motheds.indexOf(mothed) <= 0) {
             return false;
         }
         url = url.substr(0, 7).toLowerCase() == "http://" ? url : this.apiUrl + url;
@@ -34,7 +34,7 @@ var http = {
                 type: mothed,
                 data: data,
                 dataType: 'json',
-                success: fun(data)
+                success: fun
             }
         )
     },

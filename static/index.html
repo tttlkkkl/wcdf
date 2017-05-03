@@ -59,27 +59,52 @@
         element.init();
         layui.element().progress('demo', '50%');
         var obj = {
+            //时间
             t: 0,
+            //是否暂停
             s: 0,
+            //随机进度
             r: Math.floor(Math.random() * 100),
             timer: function () {
                 var self = this;
                 this.t += 1;
                 if (this.t <= 100 && this.s == 0) {
-                    element.progress('demo', (self.t) + '%');
+                    this.element();
                     setTimeout(function () {
                         self.timer();
                     }, 100);
                 }
-                if (this.t == (this.r > 60 ? 60 : this.r)) {
+                if (this.t == (this.r > 80 ? 80 : this.r)) {
                     this.s = 1;//暂停
                 }
+            },
+            //执行动画
+            element: function () {
+                this.t = this.t <= 100 ? this.t : 100;
+                element.progress('demo', (this.t) + '%');
+            },
+            //立即结束
+            finish: function () {
+                this.t = 100;
+                this.s = 2;
+                this.element();
+            },
+            //按百分比前进
+            forward: function (t) {
+                this.t += t;
+                this.element();
             }
         };
         obj.timer();
         //登录鉴权
-        http.get('/api/auth','',function(data){
-            console.log(data)
+        http.get('/system/api/auth', '', function (data) {
+            obj.forward(10);
+            if (data.data.result == 1) {
+                obj.finish();
+            }else {
+                //鉴权
+                location.href=data.data.authUrl;
+            }
         })
     });
 </script>

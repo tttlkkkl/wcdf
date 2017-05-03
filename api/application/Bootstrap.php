@@ -58,7 +58,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
     public function _initPlugin(Yaf\Dispatcher $dispatcher)
     {
         $Config = Yaf\Registry::get('config');
-        if ($Config->debug && $Config->xhprof->dir) {//开启xhprof性能追踪
+        if (isset($Config->debug) && $Config->debug && isset($Config->xhprof->dir) && $Config->xhprof->dir) {//开启xhprof性能追踪
             $dispatcher->registerPlugin(new XhprofPlugin());
         }
     }
@@ -71,7 +71,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
         $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
         //获取允许跨域访问的配置
         $allowOrigin = Yaf\Registry::get('config')->get('origin');
-        if (strpos($allowOrigin, $origin) !== false) {
+        if ($origin && $allowOrigin && strpos($allowOrigin, $origin) !== false) {
             header('Access-Control-Allow-Origin:' . $origin);
             header('Access-Control-Allow-Methods:POST');
             header('Access-Control-Allow-Headers:x-requested-with,content-type');

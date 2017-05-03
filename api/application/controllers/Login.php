@@ -6,7 +6,7 @@
  * Time: 下午10:13
  * author :李华 yehong0000@163.com
  */
-use system\oauth\Login;
+use system\auth\Login;
 class LoginController extends system\controllers\Web
 {
     public function init()
@@ -34,9 +34,9 @@ class LoginController extends system\controllers\Web
     public function callbackAction()
     {
         if(Login::getInstance()->callback()){
-            $this->redirect('/system/index/index');
+           // $this->redirect('/system/index/index');
         }else{
-            $this->redirect('/system/login/login');
+            //$this->redirect('/system/login/login');
         }
     }
 }

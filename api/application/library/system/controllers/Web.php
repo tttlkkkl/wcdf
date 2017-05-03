@@ -7,7 +7,7 @@
  * author :李华 yehong0000@163.com
  */
 namespace system\controllers;
-use system\oauth\Login;
+use system\auth\Login;
 class Web extends \Yaf\Controller_Abstract
 {
     public function init()
