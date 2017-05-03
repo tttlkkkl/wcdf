@@ -6,7 +6,7 @@
  * author :李华 yehong0000@163.com
  */
 
-namespace system\oauth;
+namespace system\aauth;
 
 
 class Base

@@ -6,7 +6,7 @@
  * Time: 下午3:57
  * author :李华 yehong0000@163.com
  */
-namespace system\member\local;
+namespace system\member\logic;
 
 use tool\check;
 

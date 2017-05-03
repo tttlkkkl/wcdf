@@ -2104,7 +2104,7 @@ class Wechat
     }
 
     /**
-     * oauth 授权跳转接口
+     * auth 授权跳转接口
      * @param string $callback 回调URI
      * @param string $state 重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值
      * @return string

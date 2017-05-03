@@ -5,7 +5,7 @@
  * Time: 下午8:51
  * author :李华 yehong0000@163.com
  */
-namespace system\oauth;
+namespace system\auth;
 
 use log\Log;
 use tool\Http;

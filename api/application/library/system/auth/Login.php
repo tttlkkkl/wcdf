@@ -6,7 +6,7 @@
  * Time: 下午9:16
  * author :李华 yehong0000@163.com
  */
-namespace system\oauth;
+namespace system\auth;
 use tool\Http;
 use \tool\Tool;
 class Login

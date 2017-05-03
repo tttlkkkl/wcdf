@@ -10,6 +10,7 @@
     <title>企业号快捷开发平台</title>
     <script type="text/javascript" src="common/layui/layui.js"></script>
     <script type="text/javascript" src="common/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="common/frame.js"></script>
     <link href="common/layui/css/layui.css" rel="stylesheet" media="all">
 </head>
 <body>
@@ -70,13 +71,16 @@
                         self.timer();
                     }, 100);
                 }
-                console.log(this.r);
                 if (this.t == (this.r > 60 ? 60 : this.r)) {
                     this.s = 1;//暂停
                 }
             }
         };
         obj.timer();
+        //登录鉴权
+        http.get('/api/auth','',function(data){
+            console.log(data)
+        })
     });
 </script>
 

@@ -15,6 +15,20 @@
 
         public function indexAction()
         {
+            echo 1;
+        }
 
+        /**
+         * 登录鉴权
+         */
+        public function auth(){
+            $fun = sprintf('%sAuth', $this->getRequest()->getMethod());
+            $this->getResponse()->setBody(packing(0, 'success', call_user_func(
+                [
+                    'system\auth\AuthFactory',
+                    $fun
+                ],
+                self::getParams()
+            ), null, null));
         }
     }

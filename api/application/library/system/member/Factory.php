@@ -8,7 +8,7 @@
  */
 namespace system\member;
 
-use system\member\local\DepartmentLocal;
+use system\member\logic\DepartmentLocal;
 
 class Factory
 {
