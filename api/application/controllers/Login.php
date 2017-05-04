@@ -35,10 +35,6 @@ class LoginController extends system\controllers\Web {
         Dispatcher::getInstance()->disableView();
         try {
             $redirect_uri = Registry::get('config')->domain->root;
-            echo session_id();
-            pre($_SESSION);
-            pre(session('user','','login'));
-            pre(session('company','','login'));
             if (Login::getInstance()->callback()) {
                 //$this->redirect($redirect_uri);
             } else {

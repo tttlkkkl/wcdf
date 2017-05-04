@@ -64,8 +64,22 @@ class Login {
         if (session('state_str') != $_REQUEST['state']) {
             throw new \Exception('标识符错误或已过期，请重试！', 4200);
         }
-        $userInfo = $this->getLoginUserInfo($_REQUEST['auth_code']);
+        $userInfo = $this->getLoginUserInfo($_GET['auth_code']);
         $userInfo = json_decode($userInfo, true);
+        pre($userInfo);
+        $userInfo = Array
+        (
+            'usertype'  => 1,
+            'user_info' => Array
+            (
+                'email' => '3523014598@qq.com',
+            ),
+            'corp_info' => Array
+            (
+                'corpid' => 'wx4fa7d40737be7934'
+            )
+
+        );
         if ($userInfo) {
             return $this->loginInit($userInfo);
         } else {
@@ -81,7 +95,7 @@ class Login {
     public function getLoginUserInfo($code) {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_login_info?access_token=' . WeiXin::getInstance(null, null)->getAccessToken();
         try {
-            return Http::post($url, json_encode(array('auth_code' => $code)));
+            return Http::post($url, json_encode(['auth_code' => $code]));
         } catch (\Exception $E) {
             Log::emergency('授权信息获取失败！--' . $E->getCode() . ':' . $E->getMessage());
             throw new \Exception($E->getMessage(), $E->getCode());
