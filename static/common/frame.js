@@ -34,6 +34,10 @@ var http = {
                 type: mothed,
                 data: data,
                 dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 success: fun
             }
         )

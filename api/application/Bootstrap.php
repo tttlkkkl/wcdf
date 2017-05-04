@@ -8,14 +8,12 @@
  * 这些方法, 都接受一个参数:Yaf\Dispatcher $dispatcher
  * 调用的次序, 和申明的次序相同
  */
-class Bootstrap extends Yaf\Bootstrap_Abstract
-{
+class Bootstrap extends Yaf\Bootstrap_Abstract {
 
     /**
      * 配置文件全局挂载
      */
-    public function _initConfig()
-    {
+    public function _initConfig() {
         $arrConfig = Yaf\Application::app()->getConfig();
         Yaf\Registry::set('config', $arrConfig);
     }
@@ -23,8 +21,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
     /**
      * 设置系统常量
      */
-    public function _initConstant()
-    {
+    public function _initConstant() {
         define('DS', DIRECTORY_SEPARATOR);
         define('APP_DIR', Yaf\Registry::get('config')->application->directory);
         define('ROOT_DIR', dirname(APP_DIR));
@@ -35,13 +32,14 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
     /**
      * 全局函数库的加载
      */
-    public function _initCommonFunction()
-    {
+    public function _initCommonFunction() {
         Yaf\Loader::import(Yaf\Registry::get('config')->application->directory . '/library/common/Functions.php');
     }
 
-    public function _initUser()
-    {
+    /**
+     * 基本登录信息
+     */
+    public function _initUser() {
         if (user() && user()['id']) {
             define('UID', user()['id']);
         }
@@ -55,10 +53,10 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
      *
      * @param \Yaf\Dispatcher $dispatcher
      */
-    public function _initPlugin(Yaf\Dispatcher $dispatcher)
-    {
+    public function _initPlugin(Yaf\Dispatcher $dispatcher) {
         $Config = Yaf\Registry::get('config');
-        if (isset($Config->debug) && $Config->debug && isset($Config->xhprof->dir) && $Config->xhprof->dir) {//开启xhprof性能追踪
+        //开启xhprof性能追踪
+        if (isset($Config->debug) && $Config->debug && isset($Config->xhprof->dir) && $Config->xhprof->dir) {
             $dispatcher->registerPlugin(new XhprofPlugin());
         }
     }
@@ -66,25 +64,23 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
     /**
      * 设置跨域访问
      */
-    public function _initOrigin()
-    {
+    public function _initOrigin() {
         $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
         //获取允许跨域访问的配置
         $allowOrigin = Yaf\Registry::get('config')->get('origin');
         if ($origin && $allowOrigin && strpos($allowOrigin, $origin) !== false) {
             header('Access-Control-Allow-Origin:' . $origin);
             header('Access-Control-Allow-Methods:POST');
+            header('Access-Control-Allow-Credentials:true');//跨域cookie
             header('Access-Control-Allow-Headers:x-requested-with,content-type');
         }
     }
 
-    public function _initRoute(Yaf\Dispatcher $dispatcher)
-    {
+    public function _initRoute(Yaf\Dispatcher $dispatcher) {
         //在这里注册自己的路由协议,默认使用简单路由
     }
 
-    public function _initView(Yaf\Dispatcher $dispatcher)
-    {
+    public function _initView(Yaf\Dispatcher $dispatcher) {
         //在这里注册自己的view控制器，例如smarty,firekylin
     }
 }

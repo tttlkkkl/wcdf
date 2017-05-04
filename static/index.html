@@ -101,9 +101,13 @@
             obj.forward(10);
             if (data.data.result == 1) {
                 obj.finish();
-            }else {
-                //鉴权
-                location.href=data.data.authUrl;
+                //进入管理首页
+                setTimeout(function () {
+                    location.href = '/manager/';
+                }, 400);
+            } else {
+                //进入授权流程
+                location.href = data.data.authUrl;
             }
         })
     });
