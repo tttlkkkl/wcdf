@@ -32,18 +32,22 @@ class Redis extends Driver
 
     /**
      * 架构函数
+     *
      * @param array $options 缓存参数
+     *
      * @access public
      */
     public function __construct($options = [])
     {
-        $this->handler=\db\Redis::getInstance(array('select'=>2));
+        $this->handler = \db\Redis::getInstance();
     }
 
     /**
      * 判断缓存
      * @access public
+     *
      * @param string $name 缓存变量名
+     *
      * @return bool
      */
     public function has($name)
@@ -54,8 +58,10 @@ class Redis extends Driver
     /**
      * 读取缓存
      * @access public
-     * @param string $name 缓存变量名
-     * @param mixed  $default 默认值
+     *
+     * @param string $name   缓存变量名
+     * @param mixed $default 默认值
+     *
      * @return mixed
      */
     public function get($name, $default = false)
@@ -72,9 +78,11 @@ class Redis extends Driver
     /**
      * 写入缓存
      * @access public
-     * @param string    $name 缓存变量名
-     * @param mixed     $value  存储数据
-     * @param integer   $expire  有效时间（秒）
+     *
+     * @param string $name    缓存变量名
+     * @param mixed $value    存储数据
+     * @param integer $expire 有效时间（秒）
+     *
      * @return boolean
      */
     public function set($name, $value, $expire = null)
@@ -100,8 +108,10 @@ class Redis extends Driver
     /**
      * 自增缓存（针对数值缓存）
      * @access public
-     * @param string    $name 缓存变量名
-     * @param int       $step 步长
+     *
+     * @param string $name 缓存变量名
+     * @param int $step    步长
+     *
      * @return false|int
      */
     public function inc($name, $step = 1)
@@ -113,8 +123,10 @@ class Redis extends Driver
     /**
      * 自减缓存（针对数值缓存）
      * @access public
-     * @param string    $name 缓存变量名
-     * @param int       $step 步长
+     *
+     * @param string $name 缓存变量名
+     * @param int $step    步长
+     *
      * @return false|int
      */
     public function dec($name, $step = 1)
@@ -126,7 +138,9 @@ class Redis extends Driver
     /**
      * 删除缓存
      * @access public
+     *
      * @param string $name 缓存变量名
+     *
      * @return boolean
      */
     public function rm($name)
@@ -137,7 +151,9 @@ class Redis extends Driver
     /**
      * 清除缓存
      * @access public
+     *
      * @param string $tag 标签名
+     *
      * @return boolean
      */
     public function clear($tag = null)

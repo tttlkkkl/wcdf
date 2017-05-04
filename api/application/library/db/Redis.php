@@ -11,42 +11,39 @@ namespace db;
 
 class Redis
 {
-    protected $handler = null;
+    protected        $handler = null;
     protected static $Obj;
-    protected $config  = [
-        'host'         => '127.0.0.1', // redis主机
-        'port'         => 6379, // redis端口
-        'password'     => '', // 密码
-        'select'       => 0, // 操作库
-        'expire'       => 3600, // 有效期(秒)
-        'timeout'      => 0, // 超时时间(秒)
-        'persistent'   => true, // 是否长连接
+    protected        $config  = [
+        'host'       => '127.0.0.1', // redis主机
+        'port'       => 6379, // redis端口
+        'password'   => '', // 密码
+        'select'     => 0, // 操作库
+        'expire'     => 3600, // 有效期(秒)
+        'timeout'    => 0, // 超时时间(秒)
+        'persistent' => true, // 是否长连接
     ];
+
     private function __construct($config)
     {
-        $sysConfig=\Yaf\Application::app()->getConfig()->redis->toArray();
-        $config=is_array($sysConfig)?array_merge($sysConfig,$config):$config;
-        $this->config=array_merge($this->config,$config);
+        $sysConfig = \Yaf\Application::app()->getConfig()->redis->toArray();
+        $config = is_array($sysConfig) ? array_merge($sysConfig, $config) : $config;
+        $this->config = array_merge($this->config, $config);
         $this->open();
     }
 
     /**
      * 返回一个redis连接实例
+     *
      * @param $config
+     *
      * @return \Redis
      */
-    static public function getInstance($config=[])
+    static public function getInstance($config = [])
     {
-        $key=$config;
-        unset($key['select']);
-        $key='redis_'.implode('_',$key);
-        if(!self::$Obj[$key]){
-            self::$Obj[$key]=new self($config);
+        if (!self::$Obj) {
+            self::$Obj = new self($config);
         }
-        if(isset($config['select']) && 0 != $config['select']){
-            self::$Obj[$key]->handler->select($config['select']);
-        }
-        return self::$Obj[$key]->handler;
+        return self::$Obj->handler;
     }
 
     /**

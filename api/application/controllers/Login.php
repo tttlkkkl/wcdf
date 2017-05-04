@@ -36,9 +36,9 @@ class LoginController extends system\controllers\Web {
         try {
             $redirect_uri = Registry::get('config')->domain->root;
             if (Login::getInstance()->callback()) {
-                //$this->redirect($redirect_uri);
+                $this->redirect($redirect_uri);
             } else {
-                //$this->redirect('/system/login/login');
+                $this->redirect('/system/login/login');
             }
         } catch (\Exception $E) {
             echo $E->getMessage();

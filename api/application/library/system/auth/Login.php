@@ -66,20 +66,6 @@ class Login {
         }
         $userInfo = $this->getLoginUserInfo($_GET['auth_code']);
         $userInfo = json_decode($userInfo, true);
-        pre($userInfo);
-        $userInfo = Array
-        (
-            'usertype'  => 1,
-            'user_info' => Array
-            (
-                'email' => '3523014598@qq.com',
-            ),
-            'corp_info' => Array
-            (
-                'corpid' => 'wx4fa7d40737be7934'
-            )
-
-        );
         if ($userInfo) {
             return $this->loginInit($userInfo);
         } else {
