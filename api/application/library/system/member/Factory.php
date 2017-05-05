@@ -6,15 +6,14 @@
  * Time: 上午4:16
  * author :李华 yehong0000@163.com
  */
+
 namespace system\member;
 
-use system\member\logic\DepartmentLocal;
+use system\member\logic\DepartmentLogic;
 
-class Factory
-{
-    public function __callStatic($name, $arguments)
-    {
-        return 'Bad Request';
+class Factory {
+    public function __callStatic($name, $arguments) {
+        return 'Bad Request ';
     }
 
     /**
@@ -25,9 +24,8 @@ class Factory
      * @return mixed
      * @throws \Exception
      */
-    static public function getDepartment($data)
-    {
-        return DepartmentLocal::getInstance()->get($data['id']);
+    static public function getDepartment($data) {
+        return DepartmentLogic::getInstance()->get($data['id']);
     }
 
     /**
@@ -35,9 +33,8 @@ class Factory
      *
      * @param $data
      */
-    static public function postDepartment($data)
-    {
-        return DepartmentLocal::getInstance()->post($data);
+    static public function postDepartment($data) {
+        return DepartmentLogic::getInstance()->post($data);
     }
 
     /**
@@ -48,9 +45,8 @@ class Factory
      * @return bool
      * @throws \Exception
      */
-    public static function putDepartment($data)
-    {
-        return DepartmentLocal::getInstance()->put($data);
+    public static function putDepartment($data) {
+        return DepartmentLogic::getInstance()->put($data);
     }
 
     /**
@@ -61,8 +57,11 @@ class Factory
      * @return bool
      * @throws \Exception
      */
-    public function deleteDepartment($data)
-    {
-        return DepartmentLocal::getInstance()->delete($data['id']);
+    public function deleteDepartment($data) {
+        return DepartmentLogic::getInstance()->delete($data['id']);
+    }
+
+    public function putOrganization($data) {
+
     }
 }

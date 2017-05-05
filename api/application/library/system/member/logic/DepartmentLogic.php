@@ -10,7 +10,7 @@ namespace system\member\logic;
 
 use tool\check;
 
-class DepartmentLocal
+class DepartmentLogic
 {
     protected static $Obj;
     protected        $DbModel;
@@ -22,7 +22,7 @@ class DepartmentLocal
     }
 
     /**
-     * @return DepartmentLocal
+     * @return DepartmentLogic
      */
     static public function getInstance()
     {
