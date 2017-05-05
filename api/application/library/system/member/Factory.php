@@ -10,10 +10,11 @@
 namespace system\member;
 
 use system\member\logic\DepartmentLogic;
+use system\member\logic\OrganizationLogic;
 
 class Factory {
     public function __callStatic($name, $arguments) {
-        return 'Bad Request ';
+        return 'Bad Request';
     }
 
     /**
@@ -61,7 +62,13 @@ class Factory {
         return DepartmentLogic::getInstance()->delete($data['id']);
     }
 
+    /**
+     * 更新组织架构
+     *
+     * @param $data
+     * @return bool|string
+     */
     public function putOrganization($data) {
-
+        return OrganizationLogic::getInstance()->put();
     }
 }
