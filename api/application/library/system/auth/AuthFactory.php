@@ -18,22 +18,32 @@ class AuthFactory {
     }
 
     /**
-     * 获取部门信息
+     * 获取授权信息
      *
      * @param $id
-     *
      * @return mixed
      * @throws \Exception
      */
-    static public function getAuth() {
+    public static  function getAuth() {
         $result = Login::getInstance()->checkLogin();
         header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
         session('login', 0);
-        Log::debug(\session_id());
         return [
             'result'  => $result,
             'user'    => user(),
             'authUrl' => $result ? '' : $redirect_uri = \Yaf\Registry::get('config')->domain->api . '/system/login/login'
         ];
+    }
+
+    /**
+     * 退出登录
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public static function deleteAuth(){
+        session_unset();
+        session_destroy();
+        return true;
     }
 }

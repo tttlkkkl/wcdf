@@ -70,7 +70,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
         $allowOrigin = Yaf\Registry::get('config')->get('origin');
         if ($origin && $allowOrigin && strpos($allowOrigin, $origin) !== false) {
             header('Access-Control-Allow-Origin:' . $origin);
-            header('Access-Control-Allow-Methods:POST');
+            header('Access-Control-Allow-Methods:POST,GET,DELETE,PUT,OPTIONS');
             header('Access-Control-Allow-Credentials:true');//跨域cookie
             header('Access-Control-Allow-Headers:x-requested-with,content-type');
         }

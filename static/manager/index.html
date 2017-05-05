@@ -19,14 +19,19 @@
     <div class="top">
         <ul class="layui-nav" lay-filter="top_nav">
             <li class="layui-nav-item layui-this"><a href="/manager/">管理首页</a></li>
-            <div class="layui-inline">
-                <img src="http://cdn.layui.com/avatar/168.jpg?t=1490352249902" class="layui-circle">
+            <div class="layui-inline avatar_warp">
+                <div id="avatar">
+                    <img src="/common/avatar.png" class="layui-circle">
+                </div>
+                <div id="notice">
+                    系统公告...
+                </div>
             </div>
             <li class="layui-nav-item user_nav">
                 <a href="#">root</a>
                 <dl class="layui-nav-child">
                     <dd><a href="#">设置</a></dd>
-                    <dd><a href="#">退出</a></dd>
+                    <dd><a href="#" id="loginOut">退出</a></dd>
                 </dl>
             </li>
         </ul>
@@ -38,14 +43,14 @@
                     <a href="#">成员</a>
                     <dl class="layui-nav-child">
                         <dd><a href="#" url="/manager/member/index.html">组织架构</a></dd>
-                        <dd><a href="#">同步数据</a></dd>
+                        <dd><a href="#" url="">同步数据</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">考勤</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">模板设置</a></dd>
-                        <dd><a href="javascript:;">界面控制</a></dd>
+                        <dd><a href="#">模板设置</a></dd>
+                        <dd><a href="#">界面控制</a></dd>
                         <dd><a href="#">二维码考勤</a></dd>
                         <dd><a href="#">打卡记录</a></dd>
                         <dd><a href="#">考勤分析</a></dd>
@@ -56,7 +61,7 @@
             </ul>
         </div>
         <!--展示界面-->
-        <div id="window">
+        <div id="vieWindow">
             <div class="hello">
                 欢迎您！
             </div>
@@ -65,18 +70,66 @@
 
 </div>
 <script type="text/javascript">
-    layui.use('element', function () {
+    layui.use(['element','layer'], function () {
         var element = layui.element();
-    });
-    $(function () {
-        $('.layui-nav').on('click', 'a', function () {
-            var This=$(this);
-            var url = This.attr('url');
-            var html= $.get(url,function(html){
-                $('#window').html(html);
+        //退出
+        function loginOut() {
+            http.delete('/system/api/auth', '', function (data) {
+                layer.msg(data.msg || '退出失败!');
+
+                if (data.code === 0) {
+                    location.href = '/';
+                } else {
+                    layer.msg(data.msg || '退出失败!');
+                }
+            })
+        }
+        $(function () {
+            var viewWindow = $('#vieWindow');
+            var waiting = $('<div>', {'class': 'hello'});
+            $('.layui-nav').on('click', 'dd a', function () {
+                var This = $(this);
+                var url = This.attr('url');
+                //退出
+                if (This.attr('id') === 'loginOut') {
+                    return loginOut();
+                }
+                if (!url) {
+                    viewWindow.empty();
+                    waiting.addClass('hello').html('功能正在完善中，敬请期待...').appendTo(viewWindow);
+                    return false;
+                }
+                $.get(url, function (html) {
+                    viewWindow.html(html);
+                })
+            });
+            //登录鉴权
+            http.get('/system/api/auth', '', function (data) {
+                if (data.data.result == 1) {
+                    var user = data.data.user;
+                    var avatar = $('#avatar img');
+                    var title = '';
+                    if (user.avatar !== null && user.avatar !== undefined && user.avatar !== '') {
+                        avatar.attr('src', user.avatar);
+                    }
+                    if (user.position !== null && user.position !== undefined && user.position !== '') {
+                        title += '伟大的' + user.position;
+                    }
+                    if (user.name !== null && user.name !== undefined && user.name !== '') {
+                        title += '-' + user.name;
+                    }
+                    if (title !== '') {
+                        avatar.attr('title', title);
+                        viewWindow.empty();
+                        waiting.addClass('hello').html('欢迎您！' + title + '^_^').appendTo(viewWindow);
+                    }
+                } else {
+                    //进入授权流程
+                    location.href = data.data.authUrl;
+                }
             })
         });
-    })
+    });
 </script>
 <script type="text/javascript" src="../common/frame.js"></script>
 </body>

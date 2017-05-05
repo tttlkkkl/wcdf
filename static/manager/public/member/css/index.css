@@ -3,14 +3,14 @@
     height: 100%;
 }
 #index_tree{
-    width:22%;
+    width:20%;
     height: inherit;
     /*border-right: dashed 1px #000000;*/
     float: left;
 }
 #index_member{
     /*border: dashed 1px #01AAED;*/
-    width: 77%;
+    width: 75%;
     height: inherit;
     float: right;
 }

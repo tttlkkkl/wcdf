@@ -29,22 +29,39 @@ body {
     overflow: hidden;
 }
 
-#window {
-    /*border: dashed 1px #FD482C;*/
-    /*margin-left: 200px;*/
+#vieWindow {
     width: 84%;
     overflow: hidden;
     height: inherit;
     margin: 0 auto;
 }
+
 .user_nav {
     float: right;
     right: 50px;
 }
-.hello{
+
+.hello {
     font-size: 20px;
     font-style: normal;
     text-align: center;
     width: 100%;
     margin-top: 100px;
+}
+
+.avatar_warp {
+    width: 70%;
+    margin-left: 26px;
+}
+
+#avatar img {
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+#notice{
+    width: 60%;
+    float: right;
+    height: 40px;
+    line-height: 40px;
 }
