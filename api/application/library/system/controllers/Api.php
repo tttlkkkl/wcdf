@@ -9,7 +9,7 @@
 namespace system\controllers;
 
 use log\Log;
-use system\auth\Login;
+use system\auth\Auth;
 use Yaf\Dispatcher;
 
 class Api extends \Yaf\Controller_Abstract
@@ -26,7 +26,7 @@ class Api extends \Yaf\Controller_Abstract
             die;
         }
         $uri = strtolower($_SERVER['REQUEST_URI']);
-        if (($uri !== '/system/api/oauth' && $uri !== '/system/api/auth') && !Login::checkLogin()) {
+        if (($uri !== '/system/api/oauth' && $uri !== '/system/api/auth') && !Auth::checkLogin()) {
             throw new \Exception('未授权的访问!', 4000);
         }
     }

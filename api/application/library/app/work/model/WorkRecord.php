@@ -1,21 +1,26 @@
 <?php
-
 /**
- * 成员数据模型
- * Date: 16-10-6
- * Time: 下午10:34
+ * 打卡记录模型
+ *
+ * Date: 17-5-6
+ * Time: 下午7:31
  * author :李华 yehong0000@163.com
  */
-namespace member\dao;
-use think\Dao;
-class MemberModel extends DAo
+
+namespace app\work\model;
+
+
+class WorkRecord
 {
     protected static $Obj;
-    protected $table='w_member';
+    protected $table='work_record';
+
+    private function __construct()
+    {
+    }
 
     /**
-     * 获取实例
-     * @return MemberModel
+     * @return Work
      */
     public static function getInstance()
     {

@@ -32,7 +32,7 @@ class OAuth
     }
 
     /**
-     * 获取实例
+     * @return OAuth
      */
     static public function getInstance()
     {

@@ -1,6 +1,6 @@
 var nowDOM = document.getElementById('now');
 var hours = new Date().getHours();
-var isLogin=0;//标记是否登录
+var isLogin = 0;//标记是否登录
 function getTime() {
     var min = new Date().getMinutes();
     var sec = new Date().getSeconds();
@@ -27,16 +27,37 @@ var punchBtn = document.getElementById('punchBtn');
 punchBtn.addEventListener('click', function () {
     gps.bLocation(function (rs) {
         address = this.address;
-        console.log('880', this);
-
+        var location=this;
+        var data = {
+            lat: location.lat,
+            lng: location.lng,
+            address: location.address
+        };
+        console.log(location);
+        console.log(11111);
+        console.log(data);
+        http.post('/work/api/works', data, function (ret) {
+            if (ret.code === 0) {
+                layer.open({
+                    content: '打卡成功!'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+            } else {
+                layer.open({
+                    content: ret.msg || '打卡失败!'
+                    , btn: '好'
+                });
+            }
+        });
     })
 });
-$(function(){
-   //获取用户信息
-    http.get('/system/api/oAuth','',function(data){
-        if(data.code===0){
-            if(data.data.result===1){
-                isLogin=1;
+$(function () {
+    //获取用户信息
+    http.get('/system/api/oAuth', '', function (data) {
+        if (data.code === 0) {
+            if (data.data.result === 1) {
+                isLogin = 1;
                 var user = data.data.user;
                 var avatar = $('#avatar');
                 var userName = $('#user_name');
@@ -46,21 +67,21 @@ $(function(){
                 if (user.name !== null && user.name !== undefined && user.name !== '') {
                     userName.text(user.name);
                 }
-            }else {
+            } else {
                 layer.open({
                     content: '您未登入系统，是否前往登录?'
-                    ,btn: ['去登录', '朕知道了']
-                    ,yes: function(index){
+                    , btn: ['去登录', '朕知道了']
+                    , yes: function (index) {
                         layer.close(index);
-                        location.href='/mobile/';
+                        location.href = '/mobile/';
                     }
                 });
             }
-        }else {
+        } else {
             layer.open({
-                content:data.msg || '鉴权失败!'
-                ,skin: 'msg'
-                ,time: 2 //2秒后自动关闭
+                content: data.msg || '鉴权失败!'
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
             });
         }
     })

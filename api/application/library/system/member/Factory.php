@@ -12,8 +12,10 @@ namespace system\member;
 use system\member\logic\DepartmentLogic;
 use system\member\logic\OrganizationLogic;
 
-class Factory {
-    public function __callStatic($name, $arguments) {
+class Factory
+{
+    public static function __callStatic($name, $arguments)
+    {
         return 'Bad Request';
     }
 
@@ -25,8 +27,9 @@ class Factory {
      * @return mixed
      * @throws \Exception
      */
-    static public function getDepartment($data) {
-        return DepartmentLogic::getInstance()->get($data['id']);
+    static public function getDepartment($data)
+    {
+        return DepartmentLogic::getInstance()->get(isset($data['id']) ? $data['id'] : 0);
     }
 
     /**
@@ -34,7 +37,8 @@ class Factory {
      *
      * @param $data
      */
-    static public function postDepartment($data) {
+    static public function postDepartment($data)
+    {
         return DepartmentLogic::getInstance()->post($data);
     }
 
@@ -46,7 +50,8 @@ class Factory {
      * @return bool
      * @throws \Exception
      */
-    public static function putDepartment($data) {
+    public static function putDepartment($data)
+    {
         return DepartmentLogic::getInstance()->put($data);
     }
 
@@ -58,7 +63,8 @@ class Factory {
      * @return bool
      * @throws \Exception
      */
-    public function deleteDepartment($data) {
+    public function deleteDepartment($data)
+    {
         return DepartmentLogic::getInstance()->delete($data['id']);
     }
 
@@ -66,9 +72,11 @@ class Factory {
      * 更新组织架构
      *
      * @param $data
+     *
      * @return bool|string
      */
-    public function putOrganization($data) {
+    public function putOrganization($data)
+    {
         return OrganizationLogic::getInstance()->put();
     }
 }

@@ -33,16 +33,16 @@ class Error extends \Yaf\Controller_Abstract {
                 $this->display('error');
             } elseif (in_array($exception->getCode(), [515, 516, 517, 518])) {
                 $Response->setHeader($Request->getServer('SERVER_PROTOCOL'), '404 Not Found');
-                $this->getView()->assign('message', $exception->getMessage());
+                $this->getView()->assign('message', '页面不存在!');
                 $this->display('404');
             } else {
                 $Response->setHeader('Content-Type', 'application/json; charset=utf-8');
                 $Response->setHeader($Request->getServer('SERVER_PROTOCOL'), '503 Service Unavailable');
-                $Response->setBody($this->packing($exception->getCode(), $exception->getMessage(), null, null, null));
+                $Response->setBody($this->packing($exception->getCode(), '不存在的api地址!', null, null, null));
             }
         } else {
             $Response->setHeader('Content-Type', 'application/json; charset=utf-8');
-            $Response->setBody($this->packing($exception->getCode(), $exception->getMessage(), null, null, null));
+            $Response->setBody($this->packing($exception->getCode(), '系统错误!', null, null, null));
         }
     }
 

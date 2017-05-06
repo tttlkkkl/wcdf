@@ -31,7 +31,7 @@ class Auth {
     }
 
     /**
-     * 获取实例
+     * @return Auth
      */
     static public function getInstance() {
         if (!self::$Obj) {
