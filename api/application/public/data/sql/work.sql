@@ -10,6 +10,7 @@ CREATE TABLE `w_work` (
   `has_late` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0正常,其他表示当日迟到次数',
   `has_leave_early` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0正常,1表示当日早退次数',
   `has_absenteeism` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0正常，1表示旷工',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='考勤记录主表，每人每天最多一条记录';
 

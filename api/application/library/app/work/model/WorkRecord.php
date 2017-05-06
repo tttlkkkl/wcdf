@@ -10,23 +10,46 @@
 namespace app\work\model;
 
 
-class WorkRecord
+use think\M;
+
+class WorkRecord extends M
 {
     protected static $Obj;
-    protected $table='work_record';
+    protected        $table = 'w_work_record';
 
-    private function __construct()
+
+    /**
+     * 初始化
+     */
+    protected function initialize()
     {
+        parent::initialize();
     }
 
     /**
-     * @return Work
+     * @return WorkRecord
      */
     public static function getInstance()
     {
-        if(!self::$Obj){
-            self::$Obj=new self;
+        if (!self::$Obj) {
+            self::$Obj = new self;
         }
         return self::$Obj;
+    }
+
+    /**
+     * 根据条件查询列表
+     *
+     * @param $where
+     * @param $page
+     */
+    public function getListByWhere($where, $page)
+    {
+        $page = $page > 0 ? $page : 1;
+        return $this->where($where)
+            ->page($page)
+            ->limit(20)
+            ->order('id', 'desc')
+            ->select();
     }
 }

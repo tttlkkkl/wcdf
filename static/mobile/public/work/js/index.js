@@ -38,6 +38,13 @@ punchBtn.addEventListener('click', function () {
         console.log(data);
         http.post('/work/api/works', data, function (ret) {
             if (ret.code === 0) {
+                var html='';
+                var container=$('#container');
+
+                html+='<li><span class="r-time">';
+                html+=ret.data.time+'</span><span class="r-address">';
+                html+=ret.data.address+'</span></li>';
+                container.append(html);
                 layer.open({
                     content: '打卡成功!'
                     , skin: 'msg'
@@ -80,6 +87,29 @@ $(function () {
         } else {
             layer.open({
                 content: data.msg || '鉴权失败!'
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+        }
+    });
+    //获取考勤列表
+    var map={
+        page:1
+    };
+    http.get('/work/api/works',map,function(ret){
+        if(ret.code===0){
+            var container=$('#container');
+            var html='';
+            var data=ret.data;
+            for (i in data){
+                html+='<li><span class="r-time">';
+                html+=data[i].create_time+'</span><span class="r-address">';
+                html+=data[i].address+'</span></li>';
+            }
+            container.html(html);
+        }else {
+            layer.open({
+                content: ret.msg || '打卡信息获取失败!'
                 , skin: 'msg'
                 , time: 2 //2秒后自动关闭
             });

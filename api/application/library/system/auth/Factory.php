@@ -12,12 +12,13 @@ namespace system\auth;
 use log\Log;
 use system\auth\OAuth;
 use Yaf\Registry;
+use system\auth\Auth;
 
 class Factory
 {
     public static function __callStatic($name, $arguments)
     {
-        return 'Bad Request';
+        throw new \Exception('Bad Request',400);
     }
 
     /**
@@ -30,7 +31,7 @@ class Factory
      */
     public static function getAuth()
     {
-        $result = Login::getInstance()->checkLogin();
+        $result = Auth::getInstance()->checkLogin();
         header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
         session('login', 0);
         return [

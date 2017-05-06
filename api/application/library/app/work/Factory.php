@@ -8,13 +8,57 @@
  */
 namespace app\work;
 
+use app\work\logic\Work;
+use app\work\logic\WorkRecord;
+
 class Factory
 {
     public static function __callStatic($name, $arguments)
     {
-        return 'Bad Request';
+        throw new \Exception('Bad Request', 400);
     }
-    public function postWork(){
 
+    /**
+     * 打卡
+     *
+     * @param $data
+     */
+    public static function postWork($data)
+    {
+        return WorkRecord::getInstance()->sign($data);
+    }
+
+    /**
+     * 获取打卡记录
+     *
+     * @param $data
+     *
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public static function getWork($data)
+    {
+        return WorkRecord::getInstance()->getListByUser($data);
+    }
+
+    /**
+     * 后台打卡详情
+     *
+     * @param $data
+     *
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public static function getWorkLists($data)
+    {
+        return WorkRecord::getInstance()->getListByWork($data);
+    }
+
+    /**
+     * 获取打卡主记录
+     *
+     * @param $data
+     */
+    public static function getClock($data)
+    {
+        return Work::getInstance()->getList($data);
     }
 }

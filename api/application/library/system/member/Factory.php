@@ -16,7 +16,7 @@ class Factory
 {
     public static function __callStatic($name, $arguments)
     {
-        return 'Bad Request';
+        throw new \Exception('Bad Request',400);
     }
 
     /**

@@ -7,12 +7,12 @@
  * author :李华 yehong0000@163.com
  */
 namespace system\controllers;
-use system\auth\Login;
+use system\auth\Auth;
 class Web extends \Yaf\Controller_Abstract
 {
     public function init()
     {
-        if(!Login::checkLogin() && strtolower($this->getRequest()->getControllerName()) != 'login'){
+        if(!Auth::checkLogin() && strtolower($this->getRequest()->getControllerName()) != 'login'){
             $this->redirect('system/login/login');
         }
     }

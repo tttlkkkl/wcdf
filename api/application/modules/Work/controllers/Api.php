@@ -15,7 +15,34 @@ class ApiController extends system\controllers\Api {
      * 考勤资源
      */
     public function worksAction() {
-        $fun = sprintf('%sDepartment', $this->getRequest()->getMethod());
+        $fun = sprintf('%sWork', $this->getRequest()->getMethod());
+        $this->getResponse()->setBody($this->packing(0, 'success', call_user_func(
+            [
+                'app\work\Factory',
+                $fun
+            ],
+            self::getParams()
+        ), null, null));
+    }
+    /**
+     * 考勤资源以天计
+     */
+    public function clocksAction() {
+        $fun = sprintf('%sClock', $this->getRequest()->getMethod());
+        $this->getResponse()->setBody($this->packing(0, 'success', call_user_func(
+            [
+                'app\work\Factory',
+                $fun
+            ],
+            self::getParams()
+        ), null, null));
+    }
+
+    /**
+     * 打卡详细
+     */
+    public function workListsAction(){
+        $fun = sprintf('%sWorkLists', $this->getRequest()->getMethod());
         $this->getResponse()->setBody($this->packing(0, 'success', call_user_func(
             [
                 'app\work\Factory',

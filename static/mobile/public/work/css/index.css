@@ -125,12 +125,18 @@ body {
 .record span {
   display: inline-block;
   vertical-align: middle;
-  width: 50%;
   text-align: center;
   height: 50px;
   font-size: 16px;
   line-height: 50px;
 }
+.r-time{
+  width: 29%;
+}
+.r-address{
+  width: 70%;
+}
+
 .record .r-time, .record .r-address {
   color: rgba(39, 130, 215, 1.0);
 }
