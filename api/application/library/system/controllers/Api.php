@@ -8,8 +8,10 @@
  */
 namespace system\controllers;
 
+use log\Log;
 use system\auth\Login;
 use Yaf\Dispatcher;
+
 class Api extends \Yaf\Controller_Abstract
 {
     use \system\controllers\Base;
@@ -19,11 +21,12 @@ class Api extends \Yaf\Controller_Abstract
         Dispatcher::getInstance()->disableView();
         $this->getResponse()->setHeader('Content-Type', 'application/json; charset=utf-8');
         //options 请求直接结束
-        if(strtoupper($this->getRequest()->getMethod()) === 'OPTIONS'){
+        if (strtoupper($this->getRequest()->getMethod()) === 'OPTIONS') {
             $this->getResponse()->setBody('');
             die;
         }
-        if ($_SERVER['REQUEST_URI'] !== '/system/api/auth' && !Login::checkLogin()) {
+        $uri = strtolower($_SERVER['REQUEST_URI']);
+        if (($uri !== '/system/api/oauth' && $uri !== '/system/api/auth') && !Login::checkLogin()) {
             throw new \Exception('未授权的访问!', 4000);
         }
     }
@@ -44,6 +47,7 @@ class Api extends \Yaf\Controller_Abstract
             'msg'  => $msg,
             'data' => $data
         );
+        //Log::info(print_r($returnData,true));
         if ($type == 'json' || !$type) {
             return json_encode($returnData, JSON_UNESCAPED_UNICODE);
         } elseif ($type == 'xml') {

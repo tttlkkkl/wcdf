@@ -6,7 +6,7 @@
  * Time: 下午10:13
  * author :李华 yehong0000@163.com
  */
-use system\auth\Login;
+use system\auth\Auth;
 use Yaf\Dispatcher;
 use Yaf\Registry;
 
@@ -19,10 +19,10 @@ class LoginController extends system\controllers\Web {
      * 登录地址
      */
     public function loginAction() {
-        if (Login::getInstance()->checkLogin()) {
+        if (Auth::getInstance()->checkLogin()) {
             $this->redirect($_SERVER['REQUEST_URI']);
         } else {
-            $url = Login::getInstance()->getLoginUrl();
+            $url = Auth::getInstance()->getLoginUrl();
             $this->getView()->assign('url', $url);
             Dispatcher::getInstance()->enableView();
         }
@@ -35,7 +35,7 @@ class LoginController extends system\controllers\Web {
         Dispatcher::getInstance()->disableView();
         try {
             $redirect_uri = Registry::get('config')->domain->root;
-            if (Login::getInstance()->callback()) {
+            if (Auth::getInstance()->callback()) {
                 $this->redirect($redirect_uri);
             } else {
                 $this->redirect('/system/login/login');

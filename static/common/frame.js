@@ -4,25 +4,26 @@
  */
 
 var http = {
-    apiUrl:'http://api.lihuasheng.cn',
-    motheds: 'post.get.put.delete',
+    apiUrl: 'http://api.lihuasheng.cn',
+    motheds: 'POST.GET.PUT.DELETE',
     get: function (url, data, fun) {
-        this.go('get', url, data, fun);
+        return this.go('GET', url, data, fun);
     },
     post: function (url, data, fun) {
-        this.go('post', url, data, fun);
+        return this.go('POST', url, data, fun);
     },
     put: function (url, data, fun) {
-        this.go('put', url, data, fun);
+        return this.go('PUT', url, data, fun);
     },
     delete: function (url, data, fun) {
-        this.go('delete', url, data, fun);
+        return this.go('DELETE', url, data, fun);
     },
     go: function (mothed, url, data, fun) {
         if (url == '') {
-            return 0;
+            return false;
         }
-        if (this.motheds.indexOf(mothed) <= 0) {
+        console.log(this.motheds.indexOf(mothed))
+        if (this.motheds.indexOf(mothed) < 0) {
             return false;
         }
         url = url.substr(0, 7).toLowerCase() == "http://" ? url : this.apiUrl + url;
@@ -40,6 +41,18 @@ var http = {
                 crossDomain: true,
                 success: fun
             }
-        )
+        );
+        return true;
     },
+    //获取url参数
+    getQueryStringParam: function (name) {
+        if (name === '' || name === undefined) {
+            return null;
+        }
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
 }

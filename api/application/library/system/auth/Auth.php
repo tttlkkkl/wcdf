@@ -14,7 +14,7 @@ use tool\Tool;
 use log\Log;
 use Yaf\Registry;
 
-class Login {
+class Auth {
     static protected $Obj;
     public $company;
 
@@ -94,10 +94,10 @@ class Login {
     public function loginInit($userInfo) {
         $userType = isset($userInfo['usertype']) ? $userInfo['usertype'] : 0;
         $wxCorpID = isset($userInfo['corp_info']['corpid']) ? $userInfo['corp_info']['corpid'] : '';
-        $wxUserID = isset($userInfo['user_info']['userid']) ? $userInfo['corp_info']['userid'] : '';
+        $wxUserID = isset($userInfo['user_info']['userid']) ? $userInfo['user_info']['userid'] : '';
         $corpInfo = Base::getCompanyInfoByWxCorpId($wxCorpID);
         if (!$corpInfo) {
-            throw new \Exception('不存在的企业信息!', 5001);
+            throw new \Exception('暂不支持该企业登录!', 5001);
         }
         $adminType = 5;
         switch ($userType) {
@@ -125,7 +125,7 @@ class Login {
             default:
                 break;
         }
-        if (!$wxUserID && $userType != 1) {
+        if (!$wxUserID && $corpInfo['id'] != 1) {
             throw new \Exception('未知的用户信息!', 5002);
         }
         try {

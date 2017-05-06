@@ -18,13 +18,26 @@
             echo 1;
         }
         /**
-         * 登录鉴权
+         * 后台登录鉴权
          */
         public function authAction(){
             $fun = sprintf('%sAuth', $this->getRequest()->getMethod());
             $this->getResponse()->setBody($this->packing(0, 'success', call_user_func(
                 [
-                    'system\auth\AuthFactory',
+                    'system\auth\Factory',
+                    $fun
+                ],
+                self::getParams()
+            ), null, null));
+        }
+        /**
+         * 前端登oauth授权
+         */
+        public function oauthAction(){
+            $fun = sprintf('%sOAuth', $this->getRequest()->getMethod());
+            $this->getResponse()->setBody($this->packing(0, 'success', call_user_func(
+                [
+                    'system\auth\Factory',
                     $fun
                 ],
                 self::getParams()

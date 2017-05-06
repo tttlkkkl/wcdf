@@ -7,6 +7,9 @@
  * author :李华 yehong0000@163.com
  */
 namespace tool;
+
+use log\Log;
+
 class Http
 {
     protected static $timeOut = 60;
@@ -39,11 +42,11 @@ class Http
      */
     static public function get($url, $params, &$header = [])
     {
-        $ex = explode('?', $url);
-        if ($ex && $params) {
-            $url = reset($ex) . '?' . (end($ex) ? (end($ex) . '&') : '') . http_build_query($params, '&');
-        } elseif (!$ex && $params) {
-            $url .= http_build_query($params, '&');
+        $index = strpos($url, '?');
+        if ($index !== false && $params) {
+            $url .= '&' . http_build_query($params, '&');
+        } elseif($params){
+            $url .= '?' . http_build_query($params, '&');
         }
         return self::execute($url, null, 2, $header);
     }
