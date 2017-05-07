@@ -4,7 +4,7 @@
  */
 
 var http = {
-    apiUrl: 'http://api.wcdf.com',
+    apiUrl: 'http://api.lihuasheng.cn',
     motheds: 'POST.GET.PUT.DELETE',
     get: function (url, data, fun) {
         return this.go('GET', url, data, fun);

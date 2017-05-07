@@ -99,6 +99,6 @@ class Work
             $list[$key]['hasLeaveEarly'] = $val['has_leave_early'] > 0 ? '有' : '没有';
             $list[$key]['hasAbsenteeism'] = $val['has_absenteeism'] > 0 ? '有' : '没有';
         }
-        return $list;
+        return $list ?: null;
     }
 }

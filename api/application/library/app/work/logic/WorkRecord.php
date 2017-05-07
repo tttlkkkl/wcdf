@@ -101,7 +101,7 @@ class WorkRecord
             $list[$key]['create_date_time'] = isset($item['create_time']) ? date('Y-m-d H:i:s', $item['create_time']) : '--:--';
             $list[$key]['create_time'] = isset($item['create_time']) ? date('H:i:s', $item['create_time']) : '--:--';
         }
-        return $list;
+        return $list ?: null;
     }
 
     /**
@@ -114,7 +114,7 @@ class WorkRecord
         $workID = isset($data['work_id']) ? $data['work_id'] : 0;
         $page = isset($data['page']) && $data['page'] > 0 ? $data['page'] : 1;
         $map = [
-            'work_id'     => $workID
+            'work_id' => $workID
         ];
         $list = $this->Model->getListByWhere($map, $page);
         foreach ($list as $key => $item) {
@@ -125,6 +125,6 @@ class WorkRecord
             $list[$key]['isLeaveEarly'] = $item['is_leave_early'] ? '是' : '否';
             $list[$key]['typeStr'] = '未知';
         }
-        return $list;
+        return $list ?: null;
     }
 }

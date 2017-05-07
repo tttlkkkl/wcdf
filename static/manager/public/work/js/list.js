@@ -9,6 +9,9 @@ function load(data) {
     http.get('/work/api/clocks', data, function (ret) {
         layer.closeAll('loading');
         if (ret.code === 0) {
+            if (ret.data === null) {
+                return false;
+            }
             layui.use('laytpl', function (laytpl) {
                 var getTpl = listTpl.innerHTML;
                 laytpl(getTpl).render(ret, function (html) {
@@ -27,6 +30,9 @@ function loadWorkList(id) {
     http.get('/work/api/workLists/work_id/' + id + '/page/' + page, '', function (ret) {
         layer.closeAll('loading');
         if (ret.code === 0) {
+            if (ret.data === null) {
+                return false;
+            }
             layui.use('laytpl', function (laytpl) {
                 var getTpl = workTpl.innerHTML;
                 laytpl(getTpl).render(ret, function (html) {
