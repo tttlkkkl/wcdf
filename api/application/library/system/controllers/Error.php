@@ -42,7 +42,7 @@ class Error extends \Yaf\Controller_Abstract {
             }
         } else {
             $Response->setHeader('Content-Type', 'application/json; charset=utf-8');
-            $Response->setBody($this->packing($exception->getCode(), $exception->getMessage(), null, null, null));
+            $Response->setBody($this->packing($exception->getCode(), '系统错误！', null, null, null));
         }
     }
 
